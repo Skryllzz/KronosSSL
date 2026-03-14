@@ -83,12 +83,20 @@ public interface ObjectAction {
      */
 
     static void register(GameObject obj, int option, ObjectAction action) {
+        if (obj == null) {
+            System.err.println("[ObjectAction] Tried to register action on null object — coords or ID may have changed revision, skipping.");
+            return;
+        }
         if(obj.actions == null)
             obj.actions = new ObjectAction[5];
         obj.actions[option - 1] = action;
     }
 
     static boolean register(GameObject obj, String optionName, ObjectAction action) {
+        if (obj == null) {
+            System.err.println("[ObjectAction] Tried to register action on null object — coords or ID may have changed revision, skipping.");
+            return false;
+        }
         int option = obj.getDef().getOption(optionName);
         if(option == -1)
             return false;
@@ -97,6 +105,10 @@ public interface ObjectAction {
     }
 
     static void register(GameObject obj, Consumer<ObjectAction[]> actionsConsumer) {
+        if (obj == null) {
+            System.err.println("[ObjectAction] Tried to register action on null object — coords or ID may have changed revision, skipping.");
+            return;
+        }
         ObjectAction[] actions = new ObjectAction[5 + 1];
         actionsConsumer.accept(actions);
         obj.actions = Arrays.copyOfRange(actions, 1, actions.length);

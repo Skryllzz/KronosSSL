@@ -46,8 +46,15 @@ public class NPCDef {
         }
     }
 
+    public static final NPCDef UNKNOWN = new NPCDef();
+
     public static NPCDef get(int id) {
-        return cached.get(id);
+        NPCDef def = cached.get(id);
+        if (def == null) {
+            System.err.println("[NPCDef] Unknown NPC ID " + id + " — not in cache. Hardcoded ID may need updating for this revision.");
+            return UNKNOWN;
+        }
+        return def;
     }
 
 

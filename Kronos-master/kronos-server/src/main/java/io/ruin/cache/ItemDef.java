@@ -91,8 +91,20 @@ public class ItemDef {
         return -1;
     }
 
+    /**
+     * Sentinel returned for item IDs that don't exist in the current cache revision.
+     * Prevents NPEs during startup when hardcoded IDs haven't been updated yet.
+     * All field accesses on this object are no-ops.
+     */
+    public static final ItemDef UNKNOWN = new ItemDef();
+
     public static ItemDef get(int id) {
-        return cached.get(id);
+        ItemDef def = cached.get(id);
+        if (def == null) {
+            System.err.println("[ItemDef] Unknown item ID " + id + " — not in cache. Hardcoded ID may need updating for this revision.");
+            return UNKNOWN;
+        }
+        return def;
     }
 
 

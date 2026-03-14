@@ -53,8 +53,15 @@ public class ObjectDef {
         }
     }
 
+    public static final ObjectDef UNKNOWN = new ObjectDef();
+
     public static ObjectDef get(int id) {
-        return LOADED.get(id);
+        ObjectDef def = LOADED.get(id);
+        if (def == null) {
+            System.err.println("[ObjectDef] Unknown object ID " + id + " — not in cache. Hardcoded ID may need updating for this revision.");
+            return UNKNOWN;
+        }
+        return def;
     }
 
 

@@ -42,3 +42,18 @@ JAVA_HOME=/Users/andrewwellington/Library/Java/JavaVirtualMachines/corretto-1.8.
 - Start servers **before** the client.
 - `server.properties` lives in `kronos-server/` and `kronos-update-server/` — both are set to DEV mode out of the box.
 - To reset to a clean state, just delete the player save files in `kronos-server/Data/`.
+
+## Cache Versions
+
+Two cache versions are available:
+
+| Directory | Revision | Notes |
+|---|---|---|
+| `Cache/` | 184 (original) | Original Kronos cache — use with rev 184 client |
+| `Cache-217/` | 217 | Extracted from Zenyte — use with rev 217 client (current default) |
+
+To switch, edit `cache_path` in `kronos-server/server.properties`:
+```
+cache_path=../Cache-217   # rev 217 (current)
+cache_path=../Cache       # rev 184 (original)
+```

@@ -120,7 +120,8 @@ public class Region {
             InBuffer landIn = new InBuffer(landscapeData);
             int objectId = -1;
             for(; ; ) {
-                int increment = landIn.readSmart();
+                // readSmart2 (HugeSmart) required from rev 193+ — object IDs can exceed 32767
+                int increment = landIn.readSmart2();
                 if(increment == 0)
                     break;
                 objectId += increment;
@@ -138,15 +139,17 @@ public class Region {
                     int direction = objectHash & 0x3;
                     if(localX < 0 || localX >= 64 || localY < 0 || localY >= 64)
                         continue;
+                    int objectHeight = height;
                     if((tileData[1][localX][localY] & 0x2) == 2)
-                        height--;
-                    if(height >= 0) {
-                        int absX = baseX + localX;
-                        int absY = baseY + localY;
-                        GameObject obj = new GameObject(objectId, absX, absY, height, type, direction);
-                        getTile(absX, absY, height, true).addObject(obj);
-                        BankActions.markTiles(obj);
-                    }
+                        objectHeight--;
+                    // Guard against out-of-bounds plane values from malformed or newer-format cache data
+                    if(objectHeight < 0 || objectHeight >= 4 || height < 0 || height >= 4)
+                        continue;
+                    int absX = baseX + localX;
+                    int absY = baseY + localY;
+                    GameObject obj = new GameObject(objectId, absX, absY, objectHeight, type, direction);
+                    getTile(absX, absY, objectHeight, true).addObject(obj);
+                    BankActions.markTiles(obj);
                 }
             }
         }

@@ -5,18 +5,27 @@ Requires **JDK 21** for the server and **JDK 8** (Corretto recommended) for the 
 ## 1. Update Server (Terminal 1)
 
 ```bash
-./gradlew kronos-update-server:run
+./gradlew --console=plain kronos-update-server:run
 ```
 
-Listens on port **7304**.
+Listens on port **7304**. Expected output on success:
+```
+Update Server is now listening on 127.0.0.1:7304
+```
 
 ## 2. Game Server (Terminal 2)
 
 ```bash
-./gradlew kronos-server:run
+./gradlew --console=plain kronos-server:run
 ```
 
-Listens on port **13302**. Uses `world_stage=DEV` by default — no database required, admin rights granted on account creation.
+Listens on port **13302**. Uses `world_stage=DEV` by default — no database required, admin rights granted on account creation. Expected output on success:
+```
+KronosPK World (1) Server is now listening on 127.0.0.1:13302
+Started server in ~13000ms.
+```
+
+> `--console=plain` is required to see actual server log output. Without it, Gradle's ANSI progress bar swallows stdout.
 
 ## 3. RuneLite Client (Terminal 3)
 

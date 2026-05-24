@@ -205,6 +205,7 @@ public final class StaticInit {
 		io.ruin.model.content.Announcements.register();
 		io.ruin.model.content.DailyVoteInterface.register();
 		io.ruin.model.content.HomeHandler.register();
+		io.ruin.model.map.object.actions.impl.edgeville.SoulWarsPortal.register();
 		io.ruin.model.content.HydraLeather.register();
 		io.ruin.model.content.ItemExchange.register();
 		io.ruin.model.content.Obstacle.register();

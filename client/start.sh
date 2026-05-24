@@ -12,8 +12,4 @@ if ! (echo > /dev/tcp/127.0.0.1/43594) 2>/dev/null; then
   echo ""
 fi
 
-java -ea \
-  --add-opens=java.base/java.lang=ALL-UNNAMED \
-  --add-exports=java.desktop/com.apple.eawt=ALL-UNNAMED \
-  -jar client-localhost.jar \
-  --debug --developer-mode
+java -ea -jar client-localhost.jar --debug --developer-mode

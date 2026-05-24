@@ -6,19 +6,16 @@ accessibleByIronMan: true
 accessibleByRegular: true
 canSellToStore: true
 restockRules:
-  restockTicks: 30
-  restockPerTick: 1
+    restockTicks: 30
+    restockPerTick: 1
 priceRules:
-  sellsAt: 130
-  buysAt: 40
-  changePer: 3
+    sellsAt: 130
+    buysAt: 40
+    changePer: 3
 defaultStock:
-- id: 1127
-  amount: 100000
-- id: 1135
-  amount: 100000
-- id: 1540
-  amount: 100000
-- id: 22097
-  amount: 100000
-  price: 2500000
+    - id: 1127
+      amount: 2
+    - id: 1135
+      amount: 2
+    - id: 1540
+      amount: 3

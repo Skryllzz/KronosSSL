@@ -97,7 +97,7 @@ public class Ladder {
 		ObjectAction.register(17385, 3209, 9616, 0, "climb-up", (player, obj) -> climb(player, 3210, 3216, 0, true, true, false));
 
 		//Edgeville dungeon
-		ObjectAction.register(17385, 3097, 9867, 0, "climb-up", (player, obj) -> climb(player, 3097, 3479, 0, true, true, false));
+		ObjectAction.register(17385, 3097, 9867, 0, "climb-up", (player, obj) -> climb(player, 3099, 3468, 0, true, true, false));
 
 		//Edgeville -> Air Obelisk
 		ObjectAction.register(17385, 3088, 9971, 0, "climb-up", (player, obj) -> climb(player, 3089, 3571, 0, true, true, false));

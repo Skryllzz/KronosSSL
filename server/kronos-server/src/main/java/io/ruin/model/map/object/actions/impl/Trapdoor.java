@@ -29,7 +29,11 @@ public class Trapdoor {
 		(player.isAt(3423, 3485)) {
 			player.sendMessage("You climb down through the trapdoor..");
 			Ladder.climb(player, 3440, 9887, 0, false, true, false);
-		} else {
+		} else if
+		(player.isAt(3097, 3468)) {
+			player.sendMessage("You climb down through the trapdoor..");
+			Ladder.climb(player, 3096, 9867, 0, false, true, false);
+	} else {
 			player.sendMessage("I'm not sure where this would take me..");
 		}
 	}

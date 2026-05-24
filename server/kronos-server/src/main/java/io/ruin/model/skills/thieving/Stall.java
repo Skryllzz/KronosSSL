@@ -299,10 +299,6 @@ public enum Stall {
 	}
 
 	private static void attempt(Player player, Stall stall, GameObject object, int replacementID) {
-		if (player.getPosition().regionId() == 12342) {
-			HomeHandler.HandleHomeStall(player, stall, object, replacementID);
-			return;
-		}
 		if (!player.getStats().check(StatType.Thieving, stall.levelReq, "steal from the " + stall.name))
 			return;
 		if (player.getInventory().isFull()) {

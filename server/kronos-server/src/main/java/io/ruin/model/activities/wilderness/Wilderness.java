@@ -357,6 +357,10 @@ public class Wilderness {
 		setLevels(new Bounds(3124, 3617, 3156, 3647, 1), 0); // Fernox enclave
 		setLevels(new Bounds(3147, 3618, 3419, 3620, 0), 13); // Fernox enclave
 
+		//Ferex Enclave Dungeon
+		setLevels(new Bounds(3144, 9990, 3196, 10043, 0), 0);
+
+
 		setLevels(new Bounds(3396, 9922, 3451, 9979, 3), 0); // Slayer basement
 
 		ItemAction.registerInventory(30104, "open", (player, item) -> {

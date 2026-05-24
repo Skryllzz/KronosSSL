@@ -654,11 +654,24 @@ public class CommandHandlerAdmin {
 					player.sendMessage("Invalid npc id: " + id);
 					return true;
 				}
-				int range = args.length > 1 ? Integer.parseInt(args[1]) : 3;
-				System.out.println("{\"id\": " + id + ", \"x\": " + player.getAbsX() + ", \"y\": "
-						+ player.getAbsY()
-						+ ", \"z\": " + player.getHeight() + ", \"walkRange\": " + range + "}, // " + def.name);
-				new NPC(id).spawn(player.getPosition());
+
+				int range = args.length > 1 ? Integer.parseInt(args[1]) : 0;
+				String direction = args.length > 2 ? args[2].toUpperCase() : "S";
+				String world = args.length > 3 ? args[3].toUpperCase() : "ECO";
+				String npcName = def.name.replace("\\", "\\\\").replace("\"", "\\\"");
+
+				System.out.println("{");
+				System.out.println("  \"id\": " + id + ",");
+				System.out.println("  \"x\": " + player.getAbsX() + ",");
+				System.out.println("  \"y\": " + player.getAbsY() + ",");
+				System.out.println("  \"z\": " + player.getHeight() + ",");
+				System.out.println("  \"direction\": \"" + direction + "\",");
+				System.out.println("  \"walkRange\": " + range + ",");
+				System.out.println("  \"world\": \"" + world + "\",");
+				System.out.println("  \"npcName\": \"" + npcName + "\"");
+				System.out.println("},");
+
+				new NPC(id).spawn(player.getAbsX(), player.getAbsY(), player.getHeight(), range);
 				return true;
 			}
 
@@ -689,6 +702,11 @@ public class CommandHandlerAdmin {
 					return true;
 				}
 				System.out.println(Arrays.toString(results.toArray()));
+				return true;
+			}
+
+			case "telemenu": {
+				player.teleportInterface.open(player);
 				return true;
 			}
 

@@ -3,7 +3,7 @@ setlocal
 
 set "JAR_PATH=%~dp0client-localhost.jar"
 set "JAVA17=C:\Program Files\Eclipse Adoptium\jdk-17.0.18.8-hotspot\bin\java.exe"
-set "JAVA21=C:\Users\amirm\.jdks\temurin-21.0.5\bin\java.exe"
+set "JAVA21=C:\Users\Skryllz\.jdks\ms-21.0.11\bin\java.exe"
 
 if exist "%JAVA17%" (
   set "JAVA_BIN=%JAVA17%"

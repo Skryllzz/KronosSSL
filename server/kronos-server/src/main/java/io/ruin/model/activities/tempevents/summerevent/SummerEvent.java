@@ -16,7 +16,7 @@ import java.util.*;
 public class SummerEvent {
 	public static DynamicMap map;
 
-	public static boolean disabled = false;
+	public static boolean disabled = true;
 
 	static List<String> summerBossNames = Arrays.asList(
 			"Dagannoth Rex", "Dagannoth Prime",

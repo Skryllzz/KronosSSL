@@ -23,9 +23,10 @@ public enum RingOfDueling {
 
 	public static void register() {
 		JeweleryTeleports teleports = new JeweleryTeleports("ring", false,
-			new JeweleryTeleports.Teleport("Duel Arena", new Bounds(3313, 3232, 3318, 3237, 0)),
+			new JeweleryTeleports.Teleport("Emir's Arena", new Bounds(3313, 3232, 3318, 3237, 0)),
 			new JeweleryTeleports.Teleport("Castle Wars", new Bounds(2439, 3088, 2442, 3092, 0)),
-			new JeweleryTeleports.Teleport("Clan Wars", new Bounds(3387, 3158, 3390, 3161, 0))
+			new JeweleryTeleports.Teleport("Ferox Enclave", new Bounds(3149, 3634, 3154, 3637, 0)),
+			new JeweleryTeleports.Teleport("Fortis Colosseum", new Bounds(1792, 3106, 1794, 3109, 0))
 		);
 		for (RingOfDueling ring : values())
 			teleports.register(ring.id, ring.charges, ring.replacementId);

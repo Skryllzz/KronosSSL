@@ -1,6 +1,5 @@
 package io.ruin.model.skills.magic.spells.modern;
 
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemAction;
 import io.ruin.model.item.actions.ItemItemAction;
@@ -203,13 +202,6 @@ public class JewelleryEnchant extends Spell {
 				player.animate(enchantLevelData.anim);
 				player.graphics(enchantLevelData.graphic, 100, 0);
 				item.setId(enchantLevelData.product);
-				if (enchantLevelData.product == 19553) {
-					if (player.tortureSmithed && player.tortureStrung) {
-						player.zenyteAmuletsCraftedAndEnchanted++;
-						if (player.zenyteAmuletsCraftedAndEnchanted == Achievements.THIS_WAS_TORTURE.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THIS_WAS_TORTURE.getAchievementName());
-					}
-				}
 				return true;
 			}
 

@@ -137,18 +137,6 @@ public class SawmillOperator {
 			(player, npc) -> {
 				ShopManager.openIfExists(player, "ReasonConstruction");
 			});
-		NPCAction.register(
-			1501,
-			"trade",
-			(player, npc) -> {
-				ShopManager.openIfExists(player, "ReasonHunter");
-			});
-		NPCAction.register(
-			1501,
-			1,
-			(player, npc) -> {
-				ShopManager.openIfExists(player, "ReasonHunter");
-			});
 
 		SpawnListener.register(
 			SAWMILL_OPERATOR_NPC_ID,

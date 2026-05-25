@@ -66,6 +66,7 @@ import io.ruin.model.combat.Combat;
 import io.ruin.model.combat.Hit;
 import io.ruin.model.combat.HitType;
 import io.ruin.model.combat.Killer;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.content.camelstatue.CamelStatueHandler;
 import io.ruin.model.content.camelstatue.CamelStatueRewards;
 import io.ruin.model.content.combatachievements.CombatAchievement;
@@ -76,7 +77,6 @@ import io.ruin.model.entity.Entity;
 import io.ruin.model.entity.player.Difficulty;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCombat;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.BoneCrusher;
 import io.ruin.model.item.actions.impl.itemeffects.itemhandlers.RespectTheDead;
@@ -607,87 +607,13 @@ public abstract class NPCCombat extends Combat {
 		}
 
 		if (def.combatLevel >= 100) {
-			int combatLevel = def.combatLevel;
-			int hpLevel = npc.getMaxHp();
-			int percentageBoost = player.getDifficulty().GetPercentagePointBoost();
-			int points = (int) ((combatLevel + hpLevel) / 6 * 1.25);
-			if (player.getDifficulty() == Difficulty.EASY)
-				percentageBoost = 1;
-			int percentageOfPoints = points / percentageBoost;
-			int maxPoints = points + percentageOfPoints;
-			int minPoints = (int) (maxPoints * 0.8);
-			int pointsReward = (int) (Random.get(minPoints, maxPoints) * player.pointMultiplier());
-			switch (CombatAchievementSystem.getTier(player.combatAchievementPoints)) {
-				case ELITE -> pointsReward = (int) (pointsReward * 1.05);
-				case MASTER -> pointsReward = (int) (pointsReward * 1.1);
-				case GRANDMASTER -> pointsReward = (int) (pointsReward * 1.2);
-			}
-			player.updateReasonPoints(pointsReward);
-			player.sendFilteredMessage("You receive <col=000000><shad=29F1FE>" + pointsReward
-					+ " Reason points<col=000000></shad> for killing a " + def.name + ".");
 			if (Random.get(0, 250) == 0)
 				npcRareDropTable.HandleDrop(player, 2, npc);
 		} else if (def.combatLevel < 100 && Random.get(0, 250) == 0)
 			npcRareDropTable.HandleDrop(player, 1, npc);
 
-		if (def.name.equalsIgnoreCase("sand crab") || def.name.equalsIgnoreCase("rock crab")) {
-			player.crabKills++;
-			if (player.crabKills == Achievements.ARE_YOU_SHORE_ABOUT_THIS.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.ARE_YOU_SHORE_ABOUT_THIS.name());
-		}
-
-		if (def.name.equalsIgnoreCase("lava dragon")) {
-			player.lavaDragonsKilled++;
-			if (player.lavaDragonsKilled == Achievements.WATCH_YOUR_SURROUNDINGS.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.WATCH_YOUR_SURROUNDINGS.getAchievementName());
-		}
-		if (def.name.equalsIgnoreCase("chaos elemental")) {
-			if (player.chaosElementalKills.getKills() == Achievements.RELAX_YOURE_ALMOST_DONE.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.WATCH_YOUR_SURROUNDINGS.getAchievementName());
-
-		}
-		if (def.name.equalsIgnoreCase("Kraken")) {
-			if (player.krakenKills.getKills() == Achievements.FROM_THE_KRAK_OF_DAWN.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.FROM_THE_KRAK_OF_DAWN.getAchievementName());
-		}
-		if (def.name.equalsIgnoreCase("Vorkath")) {
-			if (player.vorkathKills.getKills() == Achievements.PULL_THE_VORK_OUT.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.PULL_THE_VORK_OUT.getAchievementName());
-		}
-		if (def.name.equalsIgnoreCase("Galvek")) {
-			if (player.galvekKills.getKills() == Achievements.FACING_YOUR_FEARS.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.FACING_YOUR_FEARS.getAchievementName());
-		}
-		if (def.name.equalsIgnoreCase("Alchemical Hydra")) {
-			if (player.alchemicalHydraKills.getKills() == Achievements.IT_HAS_HOW_MANY_HEADS.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.IT_HAS_HOW_MANY_HEADS.getAchievementName());
-		}
-		if (def.name.equalsIgnoreCase("Zulrah")) {
-			DailyTasks.handleTaskProgression(player, "zulrah");
-			if (player.zulrahKills.getKills() == Achievements.CUT_THE_HEAD_OFF_THE_SNAKE.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.CUT_THE_HEAD_OFF_THE_SNAKE.getAchievementName());
-		}
-		if (def.name.contains("Revenant")) {
-			player.revenantKillcount++;
-			if (player.revenantKillcount == Achievements.PRAY_TO_RNJESUS.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.PRAY_TO_RNJESUS.getAchievementName());
-		}
-
-		if (def.id == 3129 || def.id == 2215 || def.id == 3162 || def.id == 2205) {
-			int totalKills = (player.krilTsutsarothKills.getKills() + player.commanderZilyanaKills.getKills()
-					+ player.generalGraardorKills.getKills() + player.kreeArraKills.getKills());
-			if (totalKills == Achievements.SACRELIGIOUS.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.SACRELIGIOUS.getAchievementName());
+		if (def.name.equalsIgnoreCase("cave bug")) {
+			AchievementDiary.check(player, AchievementDiary.Task.LUMBRIDGE_EASY_2);
 		}
 
 		/*

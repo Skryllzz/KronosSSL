@@ -3,6 +3,7 @@ package io.ruin.model.map.object.actions.impl;
 import io.ruin.cache.LocType;
 import io.ruin.model.World;
 import io.ruin.model.activities.dailytasks.DailyTasks;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
@@ -31,7 +32,13 @@ public class PrayerAltar {
 		prayer.restore();
 		player.animate(645);
 		player.privateSound(2674);
+
+		if (player.getPosition().inBounds(ARDOUGNE_CHURCH)) {
+			AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_4);
+		}
 	}
+
+	private static final Bounds ARDOUGNE_CHURCH = new Bounds(2608, 3303, 2623, 3311, 0);
 
 	public static void switchBook(Player player, SpellBook book, boolean altar) {
 		if (book.isActive(player) && altar) {

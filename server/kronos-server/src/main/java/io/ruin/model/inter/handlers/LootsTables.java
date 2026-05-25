@@ -45,8 +45,6 @@ public enum LootsTables {
 	GWD_MYSTERY_BOX("GWD Mystery Box", MysteryBox.GWD_MYSTERY_BOX_TABLE),
 	GALVEK_MYSTERY_BOX("Galvek Mystery Box", MysteryBox.GALVEK_MYSTERY_BOX_TABLE),
 	ENHANCED_SUPERIOR_SLAYER_BOX("Enhanced Superior Box", MysteryBox.ENHANCED_SUPERIOR_SLAYER_BOX),
-	REASON_ULTRA_POINT_BOX("Reason Ultra Point Box", MysteryBox.ULTRA_MYSTERY_BOX),
-
 	;
 
 	String tableName;

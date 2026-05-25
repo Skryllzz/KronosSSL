@@ -269,37 +269,6 @@ public class StatList {
 		if (newXp > Stat.MAX_XP)
 			newXp = Stat.MAX_XP;
 
-		if (newXp >= 200_000_000 && stat.experience < 200_000_000) {
-			player.sendMessage(Color.ORANGE_RED.tag() + "Congratulations on achieving 200M experience in " + type.name()
-				+ " on " + Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode");
-			player.sendMessage(Color.ORANGE_RED.tag() + "You receive " + player.getDifficulty().GetMaxExpReward()
-				+ " Reason points for achieving this!");
-			player.updateReasonPoints(player.getDifficulty().GetMaxExpReward());
-			Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(),
-				" has just achieved 200M experience in " + type.name() + " on "
-					+ Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode!");
-		}
-		if (newXp >= 500_000_000 && stat.experience < 500_000_000) {
-			player.sendMessage(Color.ORANGE_RED.tag() + "Congratulations on achieving 500M experience in " + type.name()
-				+ " on " + Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode");
-			player.sendMessage(Color.ORANGE_RED.tag() + "You receive " + player.getDifficulty().GetMaxExpReward2()
-				+ " Reason points for achieving this!");
-			player.updateReasonPoints(player.getDifficulty().GetMaxExpReward2());
-			Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(),
-				" has just achieved 500M experience in " + type.name() + " on "
-					+ Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode!");
-		}
-		if (newXp >= 1_000_000_000 && stat.experience < 1_000_000_000) {
-			player.sendMessage(Color.ORANGE_RED.tag() + "Congratulations on achieving 1B experience in " + type.name()
-				+ " on " + Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode");
-			player.sendMessage(Color.ORANGE_RED.tag() + "You receive " + player.getDifficulty().GetMaxExpReward3()
-				+ " Reason points for achieving this!");
-			player.updateReasonPoints(player.getDifficulty().GetMaxExpReward3());
-			Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(),
-				" has just achieved 1B experience in " + type.name() + " on "
-					+ Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode!");
-		}
-
 		stat.experience = newXp;
 		stat.updated = true;
 
@@ -324,9 +293,6 @@ public class StatList {
 		if (newLevel == 99) {
 			player.sendMessage(Color.ORANGE_RED.tag() + "Congratulations on achieving level 99 in " + type.name() + " on "
 				+ Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode");
-			player.sendMessage(Color.ORANGE_RED.tag() + "You receive " + player.getDifficulty().GetMaxLevelRewardBonus()
-				+ " reason points for achieving this!");
-			player.updateReasonPoints(player.getDifficulty().GetMaxLevelRewardBonus());
 			Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(),
 				" has just achieved level 99 in " + type.name() + " on "
 					+ Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode!");
@@ -334,10 +300,6 @@ public class StatList {
 				Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(),
 					" has just achieved level 99 in every skill on "
 						+ Misc.format_string(player.getDifficulty().name().toLowerCase()) + " mode!");
-				player.updateReasonPoints(player.getDifficulty().GetMaxLevelRewardBonus() * 5);
-				player.sendMessage(
-					"You have received " + NumberUtils.formatNumber(player.getDifficulty().GetMaxLevelRewardBonus() * 5L)
-						+ " reason points for achieving this!");
 			}
 		}
 		if (statId <= 6)

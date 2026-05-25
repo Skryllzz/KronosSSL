@@ -3,6 +3,7 @@ package io.ruin.model.skills.agility.courses.rooftop;
 import io.ruin.api.utils.Random;
 import io.ruin.model.activities.dailytasks.DailyTasks;
 import io.ruin.model.activities.perktree.PerkTaskHandler;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.LockType;
 import io.ruin.model.entity.shared.Renders;
@@ -164,6 +165,7 @@ public class DraynorCourse {
 			RooftopLapCounter.notify(p, "Draynor rooftop", PlayerCounter.DRAYNOR_ROOFTOP.get(p));
 			AgilityPet.rollForPet(p, 700);
 			DailyTasks.handleTaskDecrement(p, "draynorRooftop");
+			AchievementDiary.check(p, AchievementDiary.Task.LUMBRIDGE_EASY_1);
 			PerkTaskHandler.handleCompleteActivity(p, 2);
 			MarkOfGrace.rollMark(p, 10, MARK_SPAWNS);
 			p.unlock();

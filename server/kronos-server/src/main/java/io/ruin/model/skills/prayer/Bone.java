@@ -6,7 +6,6 @@ import io.ruin.model.activities.dailytasks.DailyTasks;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemAction;
@@ -98,14 +97,6 @@ public enum Bone {
 			player.getStats().addXp(StatType.Prayer, exp, true);
 			player.privateSound(2738);
 			buryCounter.increment(player, 1);
-			player.regularBonesBuriedOrSarcrificed++;
-			if (player.regularBonesBuriedOrSarcrificed == Achievements.DIVINE_SENSES_I.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DIVINE_SENSES_I.getAchievementName());
-			if (bone.getId() == DRAGON_BONES.id) {
-				player.dragonBonesBuriedOrSacrificed++;
-				if (player.dragonBonesBuriedOrSacrificed == Achievements.DIVINE_SENSES_II.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DIVINE_SENSES_II.getAchievementName());
-			}
 			player.karamDelay.delay(2);
 			player.sendMessage("You bury the bones.");
 			KourendCatacombs.buriedBone(player, this);

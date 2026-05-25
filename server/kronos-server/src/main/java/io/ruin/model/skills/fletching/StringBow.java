@@ -7,7 +7,6 @@ import io.ruin.model.activities.perktree.perks.FletchingDreams;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillItem;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.stat.StatType;
@@ -59,23 +58,6 @@ public enum StringBow {
 		player.getStats().addXp(StatType.Fletching, newExp, true);
 		PerkTaskHandler.handleGatherResource(player, strung, 1);
 		DailyTasks.handleItemObtained(player, strung, StatType.Fletching);
-		switch (unstrung.getId()) {
-			case 50:
-			case 54:
-			case 60:
-			case 64:
-			case 68:
-			case 72:
-				player.shortbowsFletchedCounter++;
-				if (player.shortbowsFletchedCounter == Achievements.THESE_SHOULDNT_TAKE_LONG_I.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THESE_SHOULDNT_TAKE_LONG_I.getAchievementName());
-				break;
-		}
-		if (strung == 861) {
-			player.magicShortbowsFletched++;
-			if (player.magicShortbowsFletched == Achievements.THESE_SHOULDNT_TAKE_LONG_II.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THESE_SHOULDNT_TAKE_LONG_II.getAchievementName());
-		}
 	}
 
 	private static final int BOW_STRING = 1777;

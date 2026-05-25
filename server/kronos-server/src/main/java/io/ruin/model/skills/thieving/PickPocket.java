@@ -7,6 +7,7 @@ import io.ruin.model.World;
 import io.ruin.model.activities.dailytasks.DailyTasks;
 import io.ruin.model.activities.perktree.PerkTaskHandler;
 import io.ruin.model.activities.perktree.Perks;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.activities.perktree.perks.MasterThief;
 import io.ruin.model.activities.perktree.perks.TheArtOfMining;
 import io.ruin.model.activities.perktree.perks.ThePetHunter;
@@ -19,7 +20,6 @@ import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.LockType;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.pet.Pet;
 import io.ruin.model.item.actions.impl.skillcapes.ThievingSkillCape;
@@ -926,9 +926,9 @@ public enum PickPocket {
 			DailyTasks.handleTaskProgression(player, pickpocket);
 			if (pickpocket == MAN) {
 				PerkTaskHandler.handleCompleteActivity(player, 13);
-				player.manPickpocketCounter++;
-				if (player.manPickpocketCounter == Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_I.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_I.getAchievementName());
+				if (player.getPosition().getRegionId() == 10547 || player.getPosition().getRegionId() == 10291) {
+					AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_1);
+				}
 			} else if (pickpocket == FARMER) {
 				PerkTaskHandler.handleCompleteActivity(player, 14);
 			} else if (pickpocket == MASTER_FARMER)
@@ -947,19 +947,10 @@ public enum PickPocket {
 				PerkTaskHandler.handleCompleteActivity(player, 25);
 			else if (pickpocket == KNIGHT) {
 				PerkTaskHandler.handleCompleteActivity(player, 19);
-				player.knightsPickpocketed++;
-				if (player.knightsPickpocketed == Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_II.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_II.getAchievementName());
 			} else if (pickpocket == HERO) {
 				PerkTaskHandler.handleCompleteActivity(player, 23);
-				player.herosPickpocketed++;
-				if (player.herosPickpocketed == Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_III.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_III.getAchievementName());
 			} else if (pickpocket == TZHAAR_HUR) {
 				PerkTaskHandler.handleCompleteActivity(player, 26);
-				player.tzhaarPickpocketed++;
-				if (player.tzhaarPickpocketed == Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_IV.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_IV.getAchievementName());
 			}
 			player.getInventory().add(pickpocket.lootTable.rollItem());
 			player.getInventory().add(pickpocket.lootTable.rollItem());
@@ -987,9 +978,9 @@ public enum PickPocket {
 //                rogueOutfit(player);
 			if (pickpocket == MAN) {
 				PerkTaskHandler.handleCompleteActivity(player, 13);
-				player.manPickpocketCounter++;
-				if (player.manPickpocketCounter == Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_I.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_I.getAchievementName());
+				if (player.getPosition().getRegionId() == 10547 || player.getPosition().getRegionId() == 10291) {
+					AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_1);
+				}
 			} else if (pickpocket == FARMER) {
 				PerkTaskHandler.handleCompleteActivity(player, 14);
 			} else if (pickpocket == MASTER_FARMER)
@@ -1008,19 +999,10 @@ public enum PickPocket {
 				PerkTaskHandler.handleCompleteActivity(player, 25);
 			else if (pickpocket == KNIGHT) {
 				PerkTaskHandler.handleCompleteActivity(player, 19);
-				player.knightsPickpocketed++;
-				if (player.knightsPickpocketed == Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_II.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_II.getAchievementName());
 			} else if (pickpocket == HERO) {
 				PerkTaskHandler.handleCompleteActivity(player, 23);
-				player.herosPickpocketed++;
-				if (player.herosPickpocketed == Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_III.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_III.getAchievementName());
 			} else if (pickpocket == TZHAAR_HUR) {
 				PerkTaskHandler.handleCompleteActivity(player, 26);
-				player.tzhaarPickpocketed++;
-				if (player.tzhaarPickpocketed == Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_IV.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.CANT_KEEP_MY_HANDS_TO_MYSELF_IV.getAchievementName());
 			}
 			player.getInventory().add(pickpocket.lootTable.rollItem());
 			player.getStats().addXp(StatType.Thieving, pickpocket.exp, true);

@@ -10,7 +10,6 @@ import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillItem;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.stat.StatType;
@@ -135,11 +134,6 @@ public enum Armour {
 					newAmount -= c.getReductionAmount();
 					if (newAmount < 1)
 						newAmount = 1;
-				}
-				if (armour == ArmourType.LEATHER) {
-					player.leatherItemsCraftedCounter++;
-					if (player.runecraftedRunesCounter == Achievements.SKIN_IS_THE_GAME.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>%s".formatted(Achievements.SKIN_IS_THE_GAME.getAchievementName()));
 				}
 				player.getInventory().remove(armourType.leatherType.leather, newAmount);
 				if (makingStuddedLeather)

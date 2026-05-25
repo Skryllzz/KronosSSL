@@ -19,7 +19,6 @@ import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.Widget;
 import io.ruin.model.inter.handlers.EquipmentStats;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.chargable.TomeOfFire;
 import io.ruin.model.item.actions.impl.chargable.TomeOfWater;
@@ -622,28 +621,6 @@ public class TargetSpell extends Spell {
 					.randDamage(maxDamage)
 					.delay(delayTicks)
 					.setAttackSpell(this);
-		}
-
-		if (hit != null) {
-			if (hit.attackSpell != null) {
-				if (hit.attackSpell.castGfx != null) {
-					if (hit.attackSpell.castGfx.length > 0) {
-						if (hit.attackSpell.castGfx[0] == 87) {
-							source.player.ibanBlastsCast++;
-							if (source.player.ibanBlastsCast == Achievements.IBANT_BELIEVE_THIS.getCompletionAmount())
-								source.player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-										+ Achievements.IBANT_BELIEVE_THIS.getAchievementName());
-						}
-
-						if (hit.attackSpell.runeItems[0].getId() == 558) {
-							source.player.strikeSpellCounter++;
-							if (source.player.strikeSpellCounter == Achievements.MIND_GAMES.getCompletionAmount())
-								source.player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-										+ Achievements.MIND_GAMES.getAchievementName());
-						}
-					}
-				}
-			}
 		}
 
 		hit.postDamage(t -> {

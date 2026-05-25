@@ -21,7 +21,6 @@ import io.ruin.model.entity.shared.listeners.LogoutListener;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.var.VarPlayerRepository;
 import io.ruin.model.inter.utils.Option;
@@ -302,9 +301,6 @@ public class Inferno {
 							"You are very impressive for a JalYt. You managed to defeat TzKal-Zuk! Please accept this cape as a token of appreciation.")
 									.animate(615));
 					player.zukKills.increment(player);
-					if (player.zukKills.getKills() == 1)
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-								+ Achievements.WOOX_WOULD_BE_PROUD.getAchievementName());
 					Objects.requireNonNull(player.combatAchievementsList
 							.get(player.getCombatAchievementIndexByOrdinal(CombatAchievements.INFERNO_GRANDMASTER.ordinal()))
 							.getCombatAchievement()).check(player);

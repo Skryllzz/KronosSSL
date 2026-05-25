@@ -347,6 +347,8 @@ public class Interface {
 
 	public static final int QUEST = 712;
 
+	public static final int QUEST_LIST = 399;
+
 	public static final int MINIGAMES = 76;
 
 	public static final int FAVOUR = 245;

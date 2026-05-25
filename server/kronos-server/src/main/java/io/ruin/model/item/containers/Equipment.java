@@ -8,7 +8,6 @@ import io.ruin.model.combat.RangedWeapon;
 import io.ruin.model.inter.Interface;
 import io.ruin.model.inter.ToplevelComponent;
 import io.ruin.model.inter.handlers.EquipmentStats;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.ItemContainer;
 import io.ruin.model.item.actions.impl.MaxCape;
@@ -241,21 +240,6 @@ public class Equipment extends ItemContainer {
 				}
 			}
 		}
-		if (selectedItem.getId() == 10551) {
-			player.fighterTorsosEquipped++;
-			if (player.fighterTorsosEquipped == Achievements.OVERNIGHT_MUSCLES.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.OVERNIGHT_MUSCLES.getAchievementName());
-		}
-		if (selectedItem.getId() == 12013 || selectedItem.getId() == 12014 || selectedItem.getId() == 12015
-				|| selectedItem.getId() == 12016) {
-			if (prospectorEquipped()) {
-				player.prospectorEquippedCounter++;
-				if (player.prospectorEquippedCounter == 1)
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-							+ Achievements.ALL_MINE.getAchievementName());
-			}
-		}
 
 		if (AttributeExtensions.hasAttribute(selectedItem, AttributeTypes.RESPECT_FOR_THE_DEAD))
 			RespectTheDead.wield(player, selectedItem);
@@ -285,18 +269,6 @@ public class Equipment extends ItemContainer {
 		if (selectedItem.getId() == 8842 || selectedItem.getId() == 8839 || selectedItem.getId() == 8840
 				|| selectedItem.getId() == 11665
 				|| selectedItem.getId() == 11663 || selectedItem.getId() == 11664) {
-			if (voidEquipped()) {
-				player.voidEquippedCounter++;
-				if (player.voidEquippedCounter == 1)
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-							+ Achievements.EMPOWERED.getAchievementName());
-			}
-		} else if (selectedItem.getId() == 23983 || selectedItem.getId() == 23991) {
-			player.crystalEquipmentWorn++;
-			if (player.crystalEquipmentWorn == Achievements.ALL_THIS_FROM_A_SEED.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.ALL_THIS_FROM_A_SEED.getAchievementName());
-
 		}
 		if (selectedItem.getId() == 25975)
 			player.specialRestoreTicks = 0;

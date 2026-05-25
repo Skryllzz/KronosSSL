@@ -14,7 +14,6 @@ import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.Toxins;
 import io.ruin.model.inter.Widget;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.actions.impl.pet.Pet;
 import io.ruin.model.map.Direction;
 import io.ruin.model.map.Tile;

@@ -7,7 +7,6 @@ import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.handlers.OptionScroll;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.map.object.actions.ObjectAction;
 import io.ruin.model.skills.farming.patch.PatchData;
@@ -132,9 +131,6 @@ public class SpiritTree {
 				"your veins.").hideContinue());
 			event.delay(1);
 			if (player.house.getOwner() == player) {
-				player.POHSpiritTreeTeleportsUed++;
-				if (player.POHSpiritTreeTeleportsUed == Achievements.TIS_THE_SPIRIT.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.TIS_THE_SPIRIT.getAchievementName());
 			}
 			player.house.buildAndEnter(player, player.house.getSpiritTreePosition(), false);
 		});

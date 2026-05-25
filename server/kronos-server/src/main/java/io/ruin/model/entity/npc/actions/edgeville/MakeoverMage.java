@@ -9,7 +9,6 @@ import io.ruin.model.inter.ToplevelComponent;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.handlers.OptionScroll;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +23,6 @@ public class MakeoverMage {
 			player.dialogue(new NPCDialogue(npc, "Please remove what your equipment before we proceed with the makeover."));
 			return;
 		}
-		player.makeOverMageCounter++;
-		if (player.makeOverMageCounter == Achievements.FEELING_LIKE_A_NEW_MAN.getCompletionAmount())
-			player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.FEELING_LIKE_A_NEW_MAN.getAchievementName());
-
 
 		player.openInterface(ToplevelComponent.MAINMODAL, Interface.MAKE_OVER_MAGE);
 		player.getPacketSender().sendIfEvents(679, 78, 0, 4, new int[]{1 << 1});

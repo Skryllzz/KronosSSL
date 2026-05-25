@@ -13,6 +13,8 @@ import io.ruin.model.activities.gauntlet.Gauntlet;
 import io.ruin.model.activities.moonsofperil.MoonsOfPerilHandler;
 import io.ruin.model.activities.newcomertasks.NewcomerTasksInterface;
 import io.ruin.model.activities.newshop.NewShopInterface;
+import io.ruin.model.content.achievementdiary.DiaryArea;
+import io.ruin.model.content.achievementdiary.DiaryDifficulty;
 import io.ruin.model.activities.perktree.PerkSets;
 import io.ruin.model.activities.perktree.Perks;
 import io.ruin.model.activities.perktree.PlayerPerk;
@@ -280,6 +282,7 @@ public abstract class PlayerAttributesRuntime extends Entity {
 	public transient TickDelay snowballCooldown = new TickDelay();
 	public transient TickDelay specTeleportDelay = new TickDelay();
 	public transient TickDelay edgevilleStallCooldown = new TickDelay();
+	public transient TickDelay lastSilkSteal = new TickDelay();
 	public transient TickDelay botPreventionJailDelay = new TickDelay();
 	public transient TickDelay botPreventionNpcShoutDelay = new TickDelay();
 	public transient TickDelay eternalResilienceDelay = new TickDelay();
@@ -453,6 +456,10 @@ public abstract class PlayerAttributesRuntime extends Entity {
 	public transient DailyVoteInterface dailyVote;
 	public transient NewcomerTasksInterface newcomerTaskInterface;
 	public transient DailyTasksInterface dailyTasksInterface;
+
+	public DiaryArea selectedDiaryArea;
+
+	public DiaryDifficulty selectedDiaryDifficulty;
 	public transient NewShopInterface newShopInterface = new NewShopInterface();
 	public transient HashMap<Integer, Integer> raidPrivateStorageItems = new HashMap<>();
 	public transient Tempoross temporossGame;

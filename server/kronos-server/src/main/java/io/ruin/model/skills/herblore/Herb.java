@@ -4,7 +4,6 @@ import io.ruin.cache.ObjType;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillItem;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemAction;
 import io.ruin.model.item.actions.ItemItemAction;
@@ -63,11 +62,6 @@ public enum Herb {
 				player.getStats().addXp(StatType.Herblore, herb.xp, true);
 
 				player.sendFilteredMessage("You clean the " + herbName + ".");
-				if (herb.grimyId == 199) {
-					player.guamsCleanedCounter++;
-					if (player.guamsCleanedCounter == Achievements.DONT_BE_SO_GRIMY.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DONT_BE_SO_GRIMY.getAchievementName());
-				}
 			});
 			SkillItem skillItem = new SkillItem(herb.unfId).addAction((player, amount, event) -> {
 				while (amount-- > 0) {

@@ -2,7 +2,6 @@ package io.ruin.model.item.actions.impl.combine;
 
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.ItemDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemObjectAction;
 import io.ruin.model.skills.Tool;
@@ -42,9 +41,6 @@ public class DragonSquare {
 				player.getInventory().remove(LEFT, 1);
 				player.getInventory().add(FULL, 1);
 				player.sendMessage("You forge the shield halves together to complete it.");
-				player.dragonSqShieldsSmithed++;
-				if (player.dragonSqShieldsSmithed == Achievements.TRAVELLERS_LUCK.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.TRAVELLERS_LUCK.getAchievementName());
 
 			}
 			player.unlock();

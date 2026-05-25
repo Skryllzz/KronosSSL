@@ -13,7 +13,6 @@ import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillItem;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemObjectAction;
 import io.ruin.model.item.containers.Equipment;
@@ -102,32 +101,6 @@ public class Cooking {
 
 				player.animate(anim);
 				if (cookedFood(player, food, fire)) {
-					player.cookedFishCounter++;
-					if (player.cookedFishCounter == Achievements.JUST_FOR_THE_HALIBUT_I.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-								+ Achievements.JUST_FOR_THE_HALIBUT_I.getAchievementName());
-
-					if (food.rawID == 371) {
-						player.swordfishCooked++;
-						if (player.swordfishCooked == Achievements.JUST_FOR_THE_HALIBUT_II.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-									+ Achievements.JUST_FOR_THE_HALIBUT_II.getAchievementName());
-					}
-
-					if (food.rawID == 13439 || food.rawID == 383) {
-						player.anglerFishAndSharksCookedCounter++;
-						if (player.anglerFishAndSharksCookedCounter == Achievements.JUST_FOR_THE_HALIBUT_III.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-									+ Achievements.JUST_FOR_THE_HALIBUT_III.getAchievementName());
-					}
-
-					if (food.rawID == 11934) {
-						player.darkCrabsCooked++;
-						if (player.darkCrabsCooked == Achievements.JUST_FOR_THE_HALIBUT_IV.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-									+ Achievements.JUST_FOR_THE_HALIBUT_IV.getAchievementName());
-					}
-
 					player.getInventory().add(food.cookedID);
 					PerkTaskHandler.handleGatherResource(player, food.cookedID, 1);
 					DailyTasks.handleItemObtained(player, food.cookedID, StatType.Cooking);

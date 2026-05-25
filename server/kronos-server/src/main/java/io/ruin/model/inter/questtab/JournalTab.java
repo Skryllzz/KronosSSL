@@ -5,6 +5,7 @@ import io.ruin.Server;
 import io.ruin.api.utils.NumberUtils;
 import io.ruin.api.utils.TimeUtils;
 import io.ruin.cache.Color;
+import io.ruin.cache.InterfaceDef;
 import io.ruin.model.ScrollbarClientScript;
 import io.ruin.model.World;
 import io.ruin.model.activities.dailytasks.DailyTasksInterface;
@@ -17,10 +18,8 @@ import io.ruin.model.inter.*;
 import io.ruin.model.inter.actions.SimpleAction;
 import io.ruin.model.inter.actions.SlotAction;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
-import io.ruin.model.inter.handlers.AchievementInterface;
 import io.ruin.model.inter.handlers.LootsTables;
 import io.ruin.model.inter.questtab.bestiary.Bestiary;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.questtab.toggles.*;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.map.Position;
@@ -58,17 +57,18 @@ public class JournalTab {
 	public enum Section {
 		PLAYER_INFO,
 		SERVER_INFO,
-		ACHIEVEMENT,
+		ACHIEVEMENT_DIARY,
+		QUEST_LIST,
 		GROUP_IRON
 	}
 
 	@Getter
 	public enum Tab {
-		SUMMARY(Interface.QUEST),
-		QUEST(Interface.SERVER_JOURNAL),
-		ACHIEVEMENT(Interface.ACHIEVEMENT),
+		SUMMARY(Interface.LOYALTY_PROGRAM),
+		QUEST(Interface.QUEST_LIST),
+		ACHIEVEMENT_DIARY(Interface.ACHIEVEMENT),
 		ACTIVITIES(Interface.ACTIVITIES),
-		MISCELLANEOUS(Interface.MISCELLANEOUS);
+		MISCELLANEOUS(848);
 
 		private final int id;
 
@@ -154,16 +154,17 @@ public class JournalTab {
 					(int) TimeUnit.MILLISECONDS.toMinutes(player.playTime * Server.tickMs()));
 		}),
 
-		PLAYERS(Tab.QUEST, t1++,
+		PLAYERS(Tab.MISCELLANEOUS, t4++,
 				player -> "Players Online: " + Color.GREEN.wrap(String.valueOf(JournalTab.getOnlineCount())),
 				(SimpleAction) PlayersOnline::open),
-		STAFF(Tab.QUEST, t1++,
+		STAFF(Tab.MISCELLANEOUS, t4++,
 				player -> "Staff Online: " + Color.GREEN.wrap(String.valueOf(JournalTab.getStaffOnlineCount())),
 				(SimpleAction) player -> JournalTab.sendStaffOnline(player)),
-		UPTIME(Tab.QUEST, t1++,
+		UPTIME(Tab.MISCELLANEOUS, t4++,
 				player -> "Uptime: " + Color.GREEN.wrap(TimeUtils.fromMs(Server.currentTick() * Server.tickMs(), false))),
-		SERVER_TIME(Tab.QUEST, t1++, player -> "Time: " + Color.GREEN.wrap(JournalTab.getServerTime())),
+		SERVER_TIME(Tab.MISCELLANEOUS, t4++, player -> "Time: " + Color.GREEN.wrap(JournalTab.getServerTime())),
 
+/*
 		PLAYER_INFORMATION(Tab.QUEST, t1++),
 		RANK(Tab.QUEST, t1++, player -> {
 			if (player.isStaff() && player.isDonator()) {
@@ -192,15 +193,18 @@ public class JournalTab {
 		SLAYER_POINTS(Tab.QUEST, t1++,
 				player -> "Slayer Points: "
 						+ Color.GREEN.wrap(Integer.toString(VarPlayerRepository.SLAYER_POINTS.get(player)))),
+*/
 		/**
 		 * Activity tab
 		 */
+/*
 		PLAYERS_WILD(Tab.QUEST, t1++,
 				player -> "Wilderness: " + Color.GREEN.wrap(String.valueOf(Wilderness.players.size())) + " players."),
 		PLAYERS_DUEL(Tab.QUEST, t1++,
 				player -> "Duel Arena: " + Color.GREEN.wrap(String.valueOf(Duel.players.size())) + " players."),
 		PK_BONUS(Tab.QUEST, t1++, player -> "PK Bonus: " + Color.GREEN.wrap((doublePkp ? "Enabled" : "Disabled"))),
 		XP_BOOST(Tab.QUEST, t1++, player -> "XP Bonus: " + Color.GREEN.wrap(weekendExpBoost ? "Enabled" : "Disabled")),
+*/
 		/**
 		 * Misc tab.
 		 */
@@ -301,44 +305,32 @@ public class JournalTab {
 	}
 
 	public static void setTab(Player player, Tab tab) {
-		int index = tab.ordinal() != 0 ? tab.ordinal() + 1 : tab.ordinal();
-		if (tab == Tab.MISCELLANEOUS) {
-			index = tab.ordinal();
-		} else if (tab == Tab.ACTIVITIES) {
-			index = 0;
-		} else if (tab == Tab.QUEST) {
-			index = 1;
-		}
 		if (tab == Tab.SUMMARY) {
+			player.currentSection = Section.PLAYER_INFO;
 			VarPlayerRepository.QUEST_ACTIVE_TAB.set(player, 0);
+		} else if (tab == Tab.QUEST) {
+			player.currentSection = Section.QUEST_LIST;
+			VarPlayerRepository.QUEST_ACTIVE_TAB.set(player, 1);
+		} else if (tab == Tab.ACHIEVEMENT_DIARY) {
+			player.currentSection = Section.ACHIEVEMENT_DIARY;
+			VarPlayerRepository.QUEST_ACTIVE_TAB.set(player, 2);
+		} else if (tab == Tab.MISCELLANEOUS) {
+			player.currentSection = Section.SERVER_INFO; // Mapping Misc to Server Info for now if that's what's intended
+			VarPlayerRepository.QUEST_ACTIVE_TAB.set(player, 3);
 		} else {
-			if (tab == Tab.MISCELLANEOUS) {
-				VarPlayerRepository.QUEST_ACTIVE_TAB.set(player, 3);
-			} else
-				VarPlayerRepository.QUEST_ACTIVE_TAB.set(player, tab.ordinal());
+			VarPlayerRepository.QUEST_ACTIVE_TAB.set(player, tab.ordinal());
 		}
-		player.getPacketSender().openSubInterface(tab.getId(), 629, 28, ClientInterfaceType.OVERLAY);
+
+		int containerId = InterfaceDef.COUNTS[629] >= 44 ? 43 : 28;
+		player.getPacketSender().openSubInterface(tab.getId(), 629, containerId, ClientInterfaceType.OVERLAY);
 		updateTab(player, tab);
 	}
 
 	public static void updateTab(Player player, Tab tab) {
-		if (tab == Tab.QUEST) {
-			player.getPacketSender().sendString(tab.getId(), 1, "Journal");
-		} else if (tab == Tab.ACHIEVEMENT) {
-			player.getPacketSender().sendIfEvents(259, 2, 0, 11, AccessMasks.ClickOp1);
-		} else if (tab == Tab.ACTIVITIES) {
+		if (tab == Tab.ACTIVITIES) {
 			player.getPacketSender().sendString(tab.getId(), 1, "Activities");
 		} else if (tab == Tab.MISCELLANEOUS) {
-			player.getPacketSender().sendString(tab.getId(), 1, "Miscellaneous");
-
-			int count = 0;
-
-			for (QuestTabEntry entry : QuestTab.TOGGLES.getEntries()) {
-				if (count++ == 2) {
-					break;
-				}
-
-			}
+			// player.getPacketSender().sendString(tab.getId(), 1, "Miscellaneous");
 		}
 
 		for (TabComponent c : tab.getComponents()) {
@@ -360,8 +352,6 @@ public class JournalTab {
 		}
 		if (slot == 3) {
 			player.sendMessage("Coming soon! :)");
-		} else if (slot == 4) {
-			setTab(player, Tab.ACHIEVEMENT);
 		} else if (slot == 5) {
 			// AchievementInterface.openTasks(player);
 		}
@@ -456,119 +446,7 @@ public class JournalTab {
 		player.openInterface(ToplevelComponent.QUEST_TAB_AREA, interfaceId);
 	}
 
-	public static void openAchievementInterface(Player player) {
-		if (player.currentAchievement == null)
-			player.currentAchievement = Achievements.ARE_YOU_SHORE_ABOUT_THIS;
-		AchievementInterface achievementInterface = new AchievementInterface();
-		achievementInterface.Init(player, player.currentAchievement.getSkillName());
-	}
-
-	private static void sendAchievementSection(Player player, Achievements.AchievementTypes tier) {
-		AchievementInterface achievementInterface = new AchievementInterface();
-		switch (tier) {
-			case EASY:
-				player.currentAchievement = Achievements.ARE_YOU_SHORE_ABOUT_THIS;
-				achievementInterface.Init(player, player.currentAchievement.getSkillName());
-				for (Achievements ach : Achievements.VALUES) {
-					player.getPacketSender().setHidden(849, ach.getHiddenButtonID(), true);
-				}
-				player.getPacketSender().setHidden(849, player.currentAchievement.getHiddenButtonID(), false);
-				achievementInterface.GetAchievementTypeButtonDown(player);
-				break;
-			case MEDIUM:
-				player.currentAchievement = Achievements.IBANT_BELIEVE_THIS;
-				achievementInterface.Init(player, player.currentAchievement.getSkillName());
-				achievementInterface.GetAchievementTypeButtonDown(player);
-				break;
-			case HARD:
-				player.currentAchievement = Achievements.PROTECTIVE_HEADGEAR;
-				achievementInterface.Init(player, player.currentAchievement.getSkillName());
-				achievementInterface.GetAchievementTypeButtonDown(player);
-				break;
-			case ELITE:
-				player.currentAchievement = Achievements.LUMBERJACK_IV;
-				achievementInterface.Init(player, player.currentAchievement.getSkillName());
-				achievementInterface.GetAchievementTypeButtonDown(player);
-				break;
-		}
-	}
-
-	private static int getNumberOfAchievementsByTier(Achievements.AchievementTypes tier) {
-		int amount = 0;
-		for (Achievements ach : Achievements.VALUES) {
-			if (ach.getAchievementType() == tier)
-				amount++;
-		}
-		return amount;
-	}
-
-	private static int getNumberOfAchievementsCompletedByTier(Player player, Achievements.AchievementTypes tier) {
-		int completed = 0;
-		for (Achievements ach : Achievements.VALUES) {
-			if (ach.getAchievementType() != tier)
-				continue;
-			if (player.getAchievementCurrentProgress(ach) >= ach.getCompletionAmount())
-				completed++;
-		}
-		return completed;
-	}
-
-	private static void sendAchievementProgressBar(Player player, int interfaceHash, Achievements.AchievementTypes tier) {
-		float completed = getNumberOfAchievementsCompletedByTier(player, tier);
-		float total = getNumberOfAchievementsByTier(tier);
-		float progress = (completed / total) * 153;
-		player.getPacketSender().sendClientScript(10533, "Ii", interfaceHash, (int) progress);
-	}
-
-	private static void sendAchievementTab(Player player) {
-		player.currentSection = Section.ACHIEVEMENT;
-
-		player.getPacketSender().openSubInterface(1086, 629, 28, ClientInterfaceType.OVERLAY);
-		player.getPacketSender().setHidden(1086, 6, true);
-		player.getPacketSender().setHidden(1086, 101, true);
-		player.getPacketSender().setHidden(1086, 19, true);
-		player.getPacketSender().setHidden(1086, 27, true);
-		player.getPacketSender().setHidden(1086, 39, false);
-		player.getPacketSender().setHidden(1086, 47, false);
-
-		int easyBarInterfaceHash = 1086 << 16 | 55;
-		int medBarInterfaceHash = 1086 << 16 | 67;
-		int hardBarInterfaceHash = 1086 << 16 | 79;
-		int eliteBarInterfaceHash = 1086 << 16 | 91;
-
-		player.getPacketSender().sendString(1086, 60,
-				getNumberOfAchievementsCompletedByTier(player, Achievements.AchievementTypes.EASY) + "/"
-						+ getNumberOfAchievementsByTier(Achievements.AchievementTypes.EASY));
-		player.getPacketSender().sendString(1086, 72,
-				getNumberOfAchievementsCompletedByTier(player, Achievements.AchievementTypes.MEDIUM) + "/"
-						+ getNumberOfAchievementsByTier(Achievements.AchievementTypes.MEDIUM));
-		player.getPacketSender().sendString(1086, 84,
-				getNumberOfAchievementsCompletedByTier(player, Achievements.AchievementTypes.HARD) + "/"
-						+ getNumberOfAchievementsByTier(Achievements.AchievementTypes.HARD));
-		player.getPacketSender().sendString(1086, 96,
-				getNumberOfAchievementsCompletedByTier(player, Achievements.AchievementTypes.ELITE) + "/"
-						+ getNumberOfAchievementsByTier(Achievements.AchievementTypes.ELITE));
-
-		int easyProgress = getNumberOfAchievementsCompletedByTier(player, Achievements.AchievementTypes.EASY)
-				/ getNumberOfAchievementsByTier(Achievements.AchievementTypes.EASY) * 100;
-		int medProgress = getNumberOfAchievementsCompletedByTier(player, Achievements.AchievementTypes.MEDIUM)
-				/ getNumberOfAchievementsByTier(Achievements.AchievementTypes.MEDIUM) * 100;
-		int hardProgress = getNumberOfAchievementsCompletedByTier(player, Achievements.AchievementTypes.HARD)
-				/ getNumberOfAchievementsByTier(Achievements.AchievementTypes.HARD) * 100;
-		int eliteProgress = getNumberOfAchievementsCompletedByTier(player, Achievements.AchievementTypes.ELITE)
-				/ getNumberOfAchievementsByTier(Achievements.AchievementTypes.ELITE) * 100;
-		sendAchievementBarColour(player, easyBarInterfaceHash, easyProgress);
-		sendAchievementBarColour(player, easyBarInterfaceHash, medProgress);
-		sendAchievementBarColour(player, easyBarInterfaceHash, hardProgress);
-		sendAchievementBarColour(player, easyBarInterfaceHash, eliteProgress);
-
-		sendAchievementProgressBar(player, easyBarInterfaceHash, Achievements.AchievementTypes.EASY);
-		sendAchievementProgressBar(player, medBarInterfaceHash, Achievements.AchievementTypes.MEDIUM);
-		sendAchievementProgressBar(player, hardBarInterfaceHash, Achievements.AchievementTypes.HARD);
-		sendAchievementProgressBar(player, eliteBarInterfaceHash, Achievements.AchievementTypes.ELITE);
-	}
-
-	private static void sendServerInformationTab(Player player) {
+	public static void sendServerInformationTab(Player player) {
 		ScrollbarClientScript.create()
 				.interfaceId(848)
 				.containerId(2)
@@ -578,7 +456,8 @@ public class JournalTab {
 				.build()
 				.send(player);
 		player.currentSection = Section.SERVER_INFO;
-		player.getPacketSender().openSubInterface(848, 629, 28, ClientInterfaceType.OVERLAY);
+		int containerId = InterfaceDef.COUNTS[629] >= 44 ? 43 : 28;
+		player.getPacketSender().openSubInterface(848, 629, containerId, ClientInterfaceType.OVERLAY);
 		for (ComponentText componentText : ComponentText.VALUES) {
 			Object value = componentText.value.apply(player);
 			if (value != null) {
@@ -604,14 +483,17 @@ public class JournalTab {
 		}
 
 		switch (player.currentSection) {
-			case ACHIEVEMENT:
-				sendAchievementTab(player);
-				break;
 			case PLAYER_INFO:
 				sendPlayerInfoTab(player);
 				break;
 			case SERVER_INFO:
 				sendServerInformationTab(player);
+				break;
+			case ACHIEVEMENT_DIARY:
+				// No periodic update needed for standard OSRS diaries as they use varbits
+				break;
+			case QUEST_LIST:
+				// No periodic update needed for standard quest list
 				break;
 			default:
 				break;
@@ -624,7 +506,8 @@ public class JournalTab {
 
 	public static void sendPlayerInfoTab(Player player) {
 		player.currentSection = JournalTab.Section.PLAYER_INFO;
-		player.getPacketSender().openSubInterface(1086, 629, 28, ClientInterfaceType.OVERLAY);
+		int containerId = InterfaceDef.COUNTS[629] >= 44 ? 43 : 28;
+		player.getPacketSender().openSubInterface(1086, 629, containerId, ClientInterfaceType.OVERLAY);
 		player.getPacketSender().setHidden(1086, 6, false);
 		player.getPacketSender().setHidden(1086, 19, false);
 		player.getPacketSender().setHidden(1086, 27, false);
@@ -637,10 +520,6 @@ public class JournalTab {
 		String difficulty = player.getDifficulty().toString().toLowerCase();
 		String diff = difficulty.substring(0, 1).toUpperCase() + difficulty.substring(1);
 		player.getPacketSender().sendString(1086, 12, "<col=FFFFFF>Difficulty mode: <col=00ff00>" + diff);
-		player.getPacketSender().sendString(1086, 13,
-				"<col=FFFFFF>Reason points: <col=00ff00>" + NumberUtils.formatNumber(player.getReasonPoints()));
-		player.getPacketSender().sendString(1086, 14,
-				"<col=FFFFFF>Achievement points: <col=00ff00>" + NumberUtils.formatNumber(player.getAchievementPoints()));
 		player.getPacketSender().sendString(1086, 15,
 				"<col=FFFFFF>Perk points: <col=00ff00>" + NumberUtils.formatNumber(player.perkPoints));
 		player.getPacketSender().sendString(1086, 16,
@@ -767,9 +646,17 @@ public class JournalTab {
 	public static void init() {
 		try {
 			InterfaceHandler.register(Interface.QUEST_TAB, interfaceHandler -> {
-				interfaceHandler.actions[3] = (SimpleAction) JournalTab::sendPlayerInfoTab;
-				interfaceHandler.actions[8] = (SimpleAction) JournalTab::sendServerInformationTab;
-				interfaceHandler.actions[13] = (SimpleAction) JournalTab::sendAchievementTab;
+				int count = InterfaceDef.COUNTS[629];
+				if(count >= 44) {
+					interfaceHandler.actions[2] = (SimpleAction) player -> setTab(player, Tab.SUMMARY);
+					interfaceHandler.actions[10] = (SimpleAction) player -> setTab(player, Tab.QUEST);
+					interfaceHandler.actions[18] = (SimpleAction) player -> setTab(player, Tab.ACHIEVEMENT_DIARY);
+					interfaceHandler.actions[26] = (SimpleAction) player -> setTab(player, Tab.MISCELLANEOUS);
+				} else if(count >= 14) {
+					interfaceHandler.actions[3] = (SimpleAction) player -> setTab(player, Tab.SUMMARY);
+					interfaceHandler.actions[8] = (SimpleAction) player -> setTab(player, Tab.QUEST);
+					interfaceHandler.actions[13] = (SimpleAction) player -> setTab(player, Tab.ACHIEVEMENT_DIARY);
+				}
 			});
 			InterfaceHandler.register(848, interfaceHandler -> {
 				interfaceHandler.actions[22] = (SimpleAction) p -> p.getDropViewer().open(p);
@@ -793,11 +680,11 @@ public class JournalTab {
 				};
 				interfaceHandler.actions[13] = (SimpleAction) player -> {
 					player
-							.forceText("I currently have " + NumberUtils.formatNumber(player.getReasonPoints()) + " reason points.");
+							.forceText("");
 				};
 				interfaceHandler.actions[14] = (SimpleAction) player -> {
 					player.forceText(
-							"I currently have " + NumberUtils.formatNumber(player.getAchievementPoints()) + " achievement points.");
+							"");
 				};
 				interfaceHandler.actions[15] = (SimpleAction) player -> {
 					player.forceText("I currently have " + NumberUtils.formatNumber(player.perkPoints) + " perk points.");
@@ -928,15 +815,6 @@ public class JournalTab {
 						ModernTeleport.teleport(player, player.bossSlayerPosition);
 					}
 				};
-				interfaceHandler.actions[44] = (SimpleAction) JournalTab::openAchievementInterface;
-				interfaceHandler.actions[85] = (SimpleAction) player -> sendAchievementSection(player,
-						Achievements.AchievementTypes.ELITE);
-				interfaceHandler.actions[73] = (SimpleAction) player -> sendAchievementSection(player,
-						Achievements.AchievementTypes.HARD);
-				interfaceHandler.actions[61] = (SimpleAction) player -> sendAchievementSection(player,
-						Achievements.AchievementTypes.MEDIUM);
-				interfaceHandler.actions[49] = (SimpleAction) player -> sendAchievementSection(player,
-						Achievements.AchievementTypes.EASY);
 			});
 			LoginListener.register(player -> {
 				setTab(player, Tab.SUMMARY);

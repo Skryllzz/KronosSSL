@@ -69,12 +69,6 @@ public class CommandHandlerBeta {
 				}
 				yield true;
 			}
-			case "reason_points" -> {
-				player.reasonPoints += 1_000_000;
-				player.sendMessage("You now have " + NumberUtils.formatNumber(player.reasonPoints) + " reason points.");
-				yield true;
-			}
-
 			case "perk" -> {
 				if (args.length == 0) {
 					player.sendMessage("::perk points [amount] - increases perk point by amount.");

@@ -8,7 +8,6 @@ import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.dialogue.PlayerDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
 import io.ruin.model.shop.ShopManager;
@@ -55,8 +54,6 @@ public class Krystilia {
 		if (!player.krystaliaUsed) {
 			player.krystaliaUsed = true;
 			player.slayerMasterUsedCounter++;
-			if (player.slayerMasterUsedCounter == Achievements.GOT_ANY_CHANGE.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.GOT_ANY_CHANGE.getAchievementName());
 		}
 
 

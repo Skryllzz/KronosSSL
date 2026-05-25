@@ -8,6 +8,7 @@ import io.ruin.model.activities.perktree.PerkTaskHandler;
 import io.ruin.model.activities.perktree.Perks;
 import io.ruin.model.activities.perktree.perks.TheArtOfMining;
 import io.ruin.model.activities.perktree.perks.ThePetHunter;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.content.HomeHandler;
 import io.ruin.model.content.camelstatue.CamelStatueHandler;
 import io.ruin.model.content.camelstatue.CamelStatueRewards;
@@ -192,6 +193,11 @@ public class Mining {
 					}
 					Region region;
 					region = player.getPosition().getRegion();
+					if (rockData == Rock.IRON) {
+						if (player.getPosition().regionId() == 13109 || player.getPosition().regionId() == 13110) {
+							AchievementDiary.check(player, AchievementDiary.Task.VARROCK_EASY_1);
+						}
+					}
 
 
 

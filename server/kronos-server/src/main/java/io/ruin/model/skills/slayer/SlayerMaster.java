@@ -12,7 +12,6 @@ import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCRareDropTable;
 import io.ruin.model.entity.player.DonatorBonus;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.map.Bounds;
 import io.ruin.model.map.Position;
 import io.ruin.model.map.Tile;
@@ -319,9 +318,6 @@ public class SlayerMaster {
 				player.totalSlayerTasksCompleted++;
 				if (master == KRYSTILIA_ID) {
 					player.wildernessSlayerTasksCompleted++;
-					if (player.wildernessSlayerTasksCompleted == Achievements.SLAYERS_GETTING_WILD.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-								+ Achievements.SLAYERS_GETTING_WILD.getAchievementName());
 				}
 				if (player.totalSlayerTasksCompleted == 1)
 					player.sendMessage("<col=000080>You have completed the newcomer task: <col=800000>"
@@ -363,9 +359,6 @@ public class SlayerMaster {
 
 					if (master == KRYSTILIA_ID) {
 						player.wildernessSlayerTasksCompleted++;
-						if (player.wildernessSlayerTasksCompleted == Achievements.SLAYERS_GETTING_WILD.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-									+ Achievements.SLAYERS_GETTING_WILD.getAchievementName());
 					}
 					PerkTaskHandler.handleSlayerTaskCompletion(player, master);
 					player.totalSlayerTasksCompleted++;

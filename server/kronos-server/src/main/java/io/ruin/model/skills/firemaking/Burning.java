@@ -10,7 +10,6 @@ import io.ruin.model.activities.perktree.perks.TheArsonist;
 import io.ruin.model.activities.raids.xeric.ChambersOfXeric;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.item.containers.Equipment;
@@ -179,10 +178,6 @@ public enum Burning {
 				}
 				player.getStats().addXp(StatType.Firemaking, xp, true);
 				burning.counter.increment(player, 1);
-				if (burning.itemId == OAK.itemId) {
-					if (player.oakLogsBurnt == Achievements.PYROMANCER_I.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.PYROMANCER_I.getAchievementName());
-				}
 				createFire(burning, fire);
 				player.face(fire);
 				player.unlock();

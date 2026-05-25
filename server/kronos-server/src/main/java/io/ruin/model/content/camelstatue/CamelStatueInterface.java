@@ -15,7 +15,7 @@ public class CamelStatueInterface {
 	public void open(Player player) {
 		player.openInterface(ToplevelComponent.MAINMODAL, 1113);
 		if (lastSection == null)
-			lastSection = CamelStatueRewards.DOUBLE_REASON_POINTS;
+			lastSection = CamelStatueRewards.DOUBLE_PERK_EXPERIENCE;
 		update(player);
 	}
 
@@ -26,7 +26,7 @@ public class CamelStatueInterface {
 
 	public void update(Player player) {
 		if (lastSection == null)
-			lastSection = CamelStatueRewards.DOUBLE_REASON_POINTS;
+			lastSection = CamelStatueRewards.DOUBLE_PERK_EXPERIENCE;
 
 		player.getPacketSender().sendString(1113, 53, lastSection.getName());
 		player.getPacketSender().sendString(1113, 54, lastSection.getDescription());
@@ -44,7 +44,6 @@ public class CamelStatueInterface {
 
 	public static void register() {
 		InterfaceHandler.register(1113, h -> {
-			h.actions[24] = (SimpleAction) p -> p.getCamelStatueInterface().changeSection(p, CamelStatueRewards.DOUBLE_REASON_POINTS);
 			h.actions[27] = (SimpleAction) p -> p.getCamelStatueInterface().changeSection(p, CamelStatueRewards.DOUBLE_PERK_EXPERIENCE);
 			h.actions[30] = (SimpleAction) p -> p.getCamelStatueInterface().changeSection(p, CamelStatueRewards.DOUBLE_SLAYER_POINTS);
 			h.actions[33] = (SimpleAction) p -> p.getCamelStatueInterface().changeSection(p, CamelStatueRewards.BOOSTED_PET_RATES);

@@ -4,7 +4,6 @@ import io.ruin.model.World;
 import io.ruin.model.activities.dailytasks.DailyTasks;
 import io.ruin.model.activities.perktree.PerkTaskHandler;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemAction;
 import io.ruin.model.map.Region;
@@ -163,22 +162,6 @@ public class Hunter {
 		}
 		DailyTasks.handleTaskKill(player, obj.trap.getTrappedCreature().getNpcId());
 		PerkTaskHandler.handleMonsterKill(player, obj.trap.getTrappedCreature().getNpcId());
-		switch (obj.trap.getTrappedCreature().getNpcId()) {
-			case 5552:
-				player.copperLongtailCatches++;
-				if (player.copperLongtailCatches == Achievements.THE_HUNT_IS_ON_I.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THE_HUNT_IS_ON_I.getAchievementName());
-				break;
-			case 2910:
-			case 2911:
-			case 2912:
-			case 12000:
-				player.totalChinchompasCaught++;
-				if (player.totalChinchompasCaught == Achievements.IS_THIS_EVEN_SAFE.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.IS_THIS_EVEN_SAFE.getAchievementName());
-				break;
-		}
-
 		obj.trap.getTrappedCreature().check(player, obj);
 	}
 

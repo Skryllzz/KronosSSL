@@ -4,9 +4,6 @@ import io.ruin.api.buffer.InBuffer;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.*;
 import io.ruin.model.inter.dialogue.MessageDialogue;
-import io.ruin.model.inter.handlers.AchievementInterface;
-import io.ruin.model.inter.questtab.main.Achievements;
-
 import io.ruin.model.tutorial.GameModeInterface;
 import io.ruin.network.incoming.Incoming;
 import io.ruin.utility.DebugMessage;
@@ -192,7 +189,7 @@ public class ActionButtonHandler {
 			slot = -1;
 		if (itemId == 65535)
 			itemId = -1;
-		if (player.debug) {
+		if (player.debug || interfaceId == 259 || interfaceId == 512) {
 			DebugMessage debug = new DebugMessage()
 					.add("option", option)
 					.add("inter", interfaceId)
@@ -200,8 +197,8 @@ public class ActionButtonHandler {
 					.add("slot", slot)
 					.add("item", itemId);
 			player.sendFilteredMessage("[ActionButton] " + debug.toString());
+			System.out.println("[DEBUG_LOG] ActionButton: " + debug.toString());
 		}
-		AchievementInterface achievementInterface = new AchievementInterface();
 
 		switch (interfaceId) {
 			case 1100:
@@ -243,53 +240,6 @@ public class ActionButtonHandler {
 
 				}
 				break;
-			case 849:
-				switch (childId) {
-					case 123:
-						player.AchievementRewardHandler(player.currentAchievement);
-						achievementInterface.GetAchievementTypeButtonDown(player);
-						break;
-					case 129:
-						player.currentAchievement = Achievements.ARE_YOU_SHORE_ABOUT_THIS;
-						achievementInterface.Init(player, player.currentAchievement.getSkillName());
-						for (Achievements ach : Achievements.VALUES) {
-							player.getPacketSender().setHidden(interfaceId, ach.getHiddenButtonID(), true);
-						}
-						player.getPacketSender().setHidden(interfaceId, player.currentAchievement.getHiddenButtonID(), false);
-						achievementInterface.GetAchievementTypeButtonDown(player);
-						break;
-					case 130:
-						player.currentAchievement = Achievements.IBANT_BELIEVE_THIS;
-						achievementInterface.Init(player, player.currentAchievement.getSkillName());
-						achievementInterface.GetAchievementTypeButtonDown(player);
-						break;
-					case 131:
-						player.currentAchievement = Achievements.PROTECTIVE_HEADGEAR;
-						achievementInterface.Init(player, player.currentAchievement.getSkillName());
-						achievementInterface.GetAchievementTypeButtonDown(player);
-						break;
-					case 132:
-						player.currentAchievement = Achievements.LUMBERJACK_IV;
-						achievementInterface.Init(player, player.currentAchievement.getSkillName());
-						achievementInterface.GetAchievementTypeButtonDown(player);
-						break;
-				}
-				break;
-		}
-		if (interfaceId == 849) {
-			for (Achievements ach : Achievements.VALUES) {
-				if (ach.getButtonID() == childId
-						&& player.currentAchievement.getAchievementType() == ach.getAchievementType()) {
-					for (Achievements ach2 : Achievements.VALUES) {
-						player.getPacketSender().setHidden(849, ach2.getHiddenButtonID(), true);
-					}
-					player.currentAchievement = ach;
-					achievementInterface.Init(player, player.currentAchievement.getSkillName());
-					player.openInterface(ToplevelComponent.MAINMODAL, player.currentAchievement.getInterfaceID());
-					player.getPacketSender().setHidden(interfaceId, player.currentAchievement.getHiddenButtonID(), false);
-					break;
-				}
-			}
 		}
 		switch (interfaceId) {
 			case 883:

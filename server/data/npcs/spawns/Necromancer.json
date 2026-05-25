@@ -1016,7 +1016,7 @@
 		"y": 3083,
 		"z": 0,
 		"direction": "W",
-		"walkRange": 0
+		"walkRange": 1
 	},
 	{
 		"name": "Leon",
@@ -1025,7 +1025,7 @@
 		"y": 3082,
 		"z": 0,
 		"direction": "W",
-		"walkRange": 0
+		"walkRange": 1
 	},
 	{
 		"name": "Guard",

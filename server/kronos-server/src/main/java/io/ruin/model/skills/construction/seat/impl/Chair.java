@@ -1,7 +1,6 @@
 package io.ruin.model.skills.construction.seat.impl;
 
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.map.Direction;
 import io.ruin.model.map.Tile;
 import io.ruin.model.map.object.GameObject;
@@ -71,9 +70,6 @@ public enum Chair implements Seat {
 			System.out.println("sat on object: " + obj.getId());
 			if (obj.getId() == 13671) {
 				if (player.house.getOwner() == player) {
-					player.demonicThronesCraftedAndSatOn++;
-					if (player.demonicThronesCraftedAndSatOn == Achievements.KING_OF_THE_UNDERGROUND.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.KING_OF_THE_UNDERGROUND.getAchievementName());
 				}
 			}
 			obj.setId(Construction.OCCUPIED_SEAT);

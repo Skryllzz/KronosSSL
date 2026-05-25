@@ -451,9 +451,6 @@ public class Item {
 				player.sendMessage("This item is augmented with a " + StringUtils.getFormattedEnumName(type) + " augment.");
 			}
 		}
-		if (id == 30430) {
-			player.getLootsViewer().updateInterface(player, LootsTables.REASON_ULTRA_POINT_BOX);
-		}
 		if (id == 30461 || id == 30446 || id == 4810) {
 			player.getLootsViewer().updateInterface(player, LootsTables.REGULAR_MYSTERY_BOX);
 		}

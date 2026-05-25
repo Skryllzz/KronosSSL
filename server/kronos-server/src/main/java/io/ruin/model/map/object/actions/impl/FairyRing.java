@@ -8,7 +8,6 @@ import io.ruin.model.inter.InterfaceHandler;
 import io.ruin.model.inter.ToplevelComponent;
 import io.ruin.model.inter.actions.SimpleAction;
 import io.ruin.model.inter.dialogue.PlayerDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.var.VarPlayerRepository;
 import io.ruin.model.map.Position;
 import io.ruin.model.map.object.GameObject;
@@ -90,11 +89,6 @@ public enum FairyRing { //todo add favorite option
 		if (entry != null && (entry == FISHER_KING || entry == ENCHANTED_VALLEY || entry.position.equals(0, 0))) {
 			player.sendMessage("This area is currently not accessible.");
 			return;
-		}
-		if (player.getPosition().regionId() == 12342) {
-			player.fairyRingsUsed++;
-			if (player.fairyRingsUsed == Achievements.GONE_IN_THE_BLINK_OF_AN_EYE.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.GONE_IN_THE_BLINK_OF_AN_EYE.getAchievementName());
 		}
 		if (entry == PLAYER_OWNED_HOUSE) {
 			if (player.house == null) {

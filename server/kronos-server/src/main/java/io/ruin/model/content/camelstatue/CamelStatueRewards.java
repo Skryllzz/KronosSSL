@@ -1,7 +1,6 @@
 package io.ruin.model.content.camelstatue;
 
 public enum CamelStatueRewards {
-	DOUBLE_REASON_POINTS("Double Reason Points", "When this is active you will receive double the amount of reason points from anything.", 200000000),
 	DOUBLE_PERK_EXPERIENCE("Double Perk Experience", "When this is active you will receive double the amount of perk experience for completing tasks.", 450000000),
 	DOUBLE_SLAYER_POINTS("Double Slayer Points", "When this is active you will receive double the amount of slayer points from completing slayer tasks.", 600000000),
 	BOOSTED_PET_RATES("Boosted Pet Rates", "When this is active you will have a 15% higher chance of obtaining any pet.", 800000000),

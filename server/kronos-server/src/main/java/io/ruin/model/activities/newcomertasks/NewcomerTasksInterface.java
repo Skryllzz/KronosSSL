@@ -162,16 +162,12 @@ public class NewcomerTasksInterface {
 				return player.totalPerkTasksCompleted;
 			case SLAYER_TASK_COMPLETION:
 				return player.totalSlayerTasksCompleted;
-			case ACHIEVEMENTS_COMPLETION:
-				return player.totalAchievementsCompleted;
 			case DEFEAT_GLOBAL_BOSS:
 				return player.globalBossKills.getKills();
 			case DEFEAT_VOTE_BOSS:
 				return player.voteBossKills.getKills();
 			case COMPLETE_DAILY_TASK:
 				return player.totalDailyTasksCompleted;
-			case SPEND_REASON_POINTS:
-				return player.totalReasonPointsSpent;
 			case SKIP_SLAYER_TASK:
 				return player.totalSlayerTasksSkipped;
 		}
@@ -213,7 +209,6 @@ public class NewcomerTasksInterface {
 				String url = "https://reasonps.com/vote/" + username;
 				p.openUrl(World.type.getWorldName() + " Vote", url);
 			};
-			h.actions[44] = (SimpleAction) JournalTab::openAchievementInterface;
 			h.actions[27] = (DefaultAction) (player, option, slot, itemId) -> {
 				switch (option) {
 					case 10:

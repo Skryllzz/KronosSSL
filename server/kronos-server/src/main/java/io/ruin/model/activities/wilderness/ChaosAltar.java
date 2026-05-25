@@ -10,7 +10,6 @@ import io.ruin.model.inter.dialogue.ItemDialogue;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.dialogue.PlayerDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemNPCAction;
@@ -100,20 +99,7 @@ public class ChaosAltar {
 					player.getInventory().remove(item.getId(), 1);
 				}
 				DailyTasks.handleTaskProgression(player, bone);
-				player.regularBonesBuriedOrSarcrificed++;
-				if (player.regularBonesBuriedOrSarcrificed == Achievements.DIVINE_SENSES_I.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DIVINE_SENSES_I.getAchievementName());
 
-				if (bone.getId() == 536) {
-					player.dragonBonesBuriedOrSacrificed++;
-					if (player.dragonBonesBuriedOrSacrificed == Achievements.DIVINE_SENSES_II.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DIVINE_SENSES_II.getAchievementName());
-				}
-				if (bone.getId() == 11943) {
-					player.lavaDragonBonesBuriedOrSacrificed++;
-					if (player.lavaDragonBonesBuriedOrSacrificed == Achievements.DIVINE_SENSES_III.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DIVINE_SENSES_III.getAchievementName());
-				}
 				DailyTasks.handleItemObtained(player, bone.getId(), StatType.Prayer);
 				player.animate(3705);
 				player.getStats().addXp(StatType.Prayer, Bone.get(item.getId()).exp * 3.5, true);
@@ -138,20 +124,7 @@ public class ChaosAltar {
 					player.getInventory().remove(item.getId(), 1);
 				}
 				DailyTasks.handleTaskProgression(player, Bone.get(item.getId() - 1));
-				player.regularBonesBuriedOrSarcrificed++;
-				if (player.regularBonesBuriedOrSarcrificed == Achievements.DIVINE_SENSES_I.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DIVINE_SENSES_I.getAchievementName());
 
-				if (item.getId() == 537) {
-					player.dragonBonesBuriedOrSacrificed++;
-					if (player.dragonBonesBuriedOrSacrificed == Achievements.DIVINE_SENSES_II.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DIVINE_SENSES_II.getAchievementName());
-				}
-				if (item.getId() == 11944) {
-					player.lavaDragonBonesBuriedOrSacrificed++;
-					if (player.lavaDragonBonesBuriedOrSacrificed == Achievements.DIVINE_SENSES_III.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.DIVINE_SENSES_III.getAchievementName());
-				}
 				DailyTasks.handleItemObtained(player, item.getId() - 1, StatType.Prayer);
 				player.animate(3705);
 				player.getStats().addXp(StatType.Prayer, Bone.get(item.getId() - 1).exp * 3.5, true);

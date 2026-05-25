@@ -12,7 +12,6 @@ import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.ButterflyNet;
 import io.ruin.model.item.actions.impl.ImplingJar;
@@ -130,13 +129,7 @@ public enum Impling {
 				}
 				PerkTaskHandler.handleMonsterKill(player, impling.npcId);
 				despawnImpling(npc);
-				if (barehands) {
-					if (impling.npcId == 7233 || impling.npcId == 1644) {
-						player.dragonImplingOrLuckyImplingCaughtBarehandedCounter++;
-						if (player.dragonImplingOrLuckyImplingCaughtBarehandedCounter == Achievements.NO_NET_NEEDED.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.NO_NET_NEEDED.getAchievementName());
-					}
-				}
+
 				player.getStats().addXp(StatType.Hunter, player.getPosition().inBounds(PURO_PURO) ? impling.puroExp : impling.worldExp, true);
 				PlayerCounter.IMPLINGS_CAUGHT.increment(player, 1);
 			} else attemptCatch(player, npc, impling);

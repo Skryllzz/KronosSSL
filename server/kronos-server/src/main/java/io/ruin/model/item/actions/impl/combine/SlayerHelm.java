@@ -6,7 +6,6 @@ import io.ruin.model.combat.Hit;
 import io.ruin.model.entity.Entity;
 import io.ruin.model.entity.player.KillCounter;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.skills.slayer.SlayerMaster;
 import io.ruin.model.var.VarPlayerRepository;
 import io.ruin.model.item.Item;
@@ -237,9 +236,6 @@ public class SlayerHelm {
 			player.sendMessage("You need a Crafting level of 55 to make a Slayer helm.");
 			return;
 		}
-		player.slayerHelmsCrafted++;
-		if (player.slayerHelmsCrafted == Achievements.PROTECTIVE_HEADGEAR.getCompletionAmount())
-			player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.PROTECTIVE_HEADGEAR.getAchievementName());
 
 		items.forEach(Item::remove);
 		player.getInventory().add(imbued ? SLAYER_HELM_IMBUE : SLAYER_HELM, 1);

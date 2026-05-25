@@ -7,7 +7,6 @@ import io.ruin.model.activities.perktree.perks.ThePetHunter;
 import io.ruin.model.content.camelstatue.CamelStatueHandler;
 import io.ruin.model.content.camelstatue.CamelStatueRewards;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.actions.impl.pet.Pet;
 import io.ruin.model.skills.farming.crop.Crop;
 import io.ruin.model.skills.farming.crop.impl.WoodTreeCrop;
@@ -140,7 +139,6 @@ public class WoodTreePatch extends Patch {
 		player.sendMessage("You examine the tree and find that it is in perfect health.");
 		getPlantedCrop().getCounter().increment(player, 1);
 		player.getStats().addXp(StatType.Farming, getPlantedCrop().getHarvestXP(), true);
-		player.treesGrown++;
 		int petChance = Random.get(getPlantedCrop().getPetOdds());
 		petChance /= 2;
 		if (CamelStatueHandler.getActiveRewards().contains(CamelStatueRewards.BOOSTED_PET_RATES))
@@ -159,9 +157,6 @@ public class WoodTreePatch extends Patch {
 			Pet.TANGLEROOT.unlock(player, 0);
 		}
 		DailyTasks.handleItemObtained(player, getObjectId(), StatType.Farming);
-		if (player.treesGrown == Achievements.IN_BLOOM.getCompletionAmount())
-			player.sendMessage(
-				"<col=000080>You have completed the achievement: <col=800000>" + Achievements.IN_BLOOM.getAchievementName());
 		advanceStage();
 		update();
 		data.getConfig().set(player, getCropVarpbitValue());

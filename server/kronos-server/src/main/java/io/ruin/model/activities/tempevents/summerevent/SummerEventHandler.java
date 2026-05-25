@@ -78,7 +78,6 @@ public class SummerEventHandler {
 				int perkPointReward = Random.get(1, 3);
 				player.summerPoints += summerPointReward;
 				player.perkPoints += perkPointReward;
-				player.reasonPoints += reasonPointReward;
 				player.sendFilteredMessage("You receive <col=000000><shad=29F1FE>" + reasonPointReward
 					+ " Reason points<col=000000></shad> for killing a " + npc.getDef().name + ".");
 				player.sendFilteredMessage("You receive <col=000000><shad=29F1FE>" + summerPointReward

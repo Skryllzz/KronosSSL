@@ -12,7 +12,6 @@ import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.dialogue.PlayerDialogue;
 import io.ruin.model.inter.handlers.OptionScroll;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.skills.construction.House;
 import io.ruin.model.skills.construction.HouseLocation;
@@ -52,9 +51,6 @@ public class EstateAgent {
 												player.getInventory().remove(COINS_995, HOUSE_COST);
 												VarPlayerRepository.OWNAFUCKINGHOUSE.set(player, 1);
 												player.house = new House();
-												player.housesBought++;
-												if (player.housesBought == Achievements.FIRST_TIME_HOME_OWNER.getCompletionAmount())
-													player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.FIRST_TIME_HOME_OWNER.getAchievementName());
 												player.dialogue(new NPCDialogue(npc, "Congratulations, adventurer! You now have your very own house! Simply step through the portal south of me, or teleport to your house to visit it."),
 													new PlayerDialogue("Will do, thank you."),
 													new NPCDialogue(npc, "Come see me again if you'd like to move your house somewhere else, or have it redecorated."));

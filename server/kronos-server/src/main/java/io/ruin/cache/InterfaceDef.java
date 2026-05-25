@@ -26,7 +26,9 @@ public class InterfaceDef {
 			if (lastChildId != -1)
 				COUNTS[i] = lastChildId + 1;
 		}
-		COUNTS[259] += 7;
+		COUNTS[259] = Math.max(COUNTS[259], 18);
+		COUNTS[512] = Math.max(COUNTS[512], 33);
+		COUNTS[119] = Math.max(COUNTS[119], 506);
 	}
 
 	public static boolean valid(int id, int child) {

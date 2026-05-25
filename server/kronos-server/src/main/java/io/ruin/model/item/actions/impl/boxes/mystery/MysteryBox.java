@@ -1196,60 +1196,6 @@ public class MysteryBox {
 		player.sendMessage("You have received " + randomPoints + " perk points from this scroll. You now have " + player.perkPoints + "!");
 	}
 
-	private static void openPointBox(Player player) {
-		if (player.getInventory().contains(30577)) {
-			player.getInventory().remove(30577, 1);
-			if (Random.get(250) != 0) {
-				int random = Random.get(250);
-				if (random < 50) {
-					player.updateReasonPoints(5000);
-					player.sendMessage("You have received 5,000 Reason points!");
-				}
-				if (random >= 50 && random < 100) {
-					player.updateAchievementPoints(1);
-					player.sendMessage("You have received 1 Achievement point!");
-				}
-				if (random >= 100 && random < 150) {
-					player.updateVotePoints(10);
-					player.sendMessage("You have received 10 vote points");
-				}
-				if (random >= 150 && random < 200) {
-					VarPlayerRepository.SLAYER_POINTS.set(player, 100 + VarPlayerRepository.SLAYER_POINTS.get(player));
-					player.sendMessage("You have received 100 Slayer points!");
-				}
-				if (random >= 200 && random <= 250) {
-					player.perkPoints += 2;
-					player.sendMessage("You have received 2 Perk points!");
-				}
-			} else {
-				int random = Random.get(250);
-				if (random < 50) {
-					player.updateReasonPoints(100000);
-					Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(), " received <shad=D80808>100,000 reason points </shad> from a point mystery box!");
-				}
-				if (random >= 50 && random < 100) {
-					player.updateAchievementPoints(10);
-					Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(), " received <shad=D80808>10 Achievement points </shad> from a point mystery box!");
-
-				}
-				if (random >= 100 && random < 150) {
-					player.updateVotePoints(25);
-					Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(), " received <shad=D80808>25 vote points </shad> from a point mystery box!");
-				}
-				if (random >= 150 && random < 200) {
-					VarPlayerRepository.SLAYER_POINTS.set(player, 1000 + VarPlayerRepository.SLAYER_POINTS.get(player));
-					Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(), " received <shad=D80808>1,000 slayer points </shad> from a point mystery box!");
-
-				}
-				if (random >= 200 && random <= 250) {
-					player.perkPoints += 15;
-					Broadcast.WORLD.sendNewsDropMessage(player, Icon.ADMINISTRATOR, "<col=000000>" + player.getName(), " received <shad=D80808>15 perk points </shad> from a point mystery box!");
-
-				}
-			}
-		}
-	}
-
 
 	public static void register() {
 		ItemAction.registerInventory(30461, "open", (player, item) -> {
@@ -1351,12 +1297,6 @@ public class MysteryBox {
 					+ reward.getDef().name.toLowerCase() + "</shad> reward from a Wilderness mystery box!");
 			player.unlock();
 			player.sendMessage("You have received a " + reward.getDef().name.toLowerCase() + " from the Wilderness mystery box!");
-		});
-		ItemAction.registerInventory(30577, "open", (player, item) -> {
-			player.lock();
-			player.closeDialogue();
-			openPointBox(player);
-			player.unlock();
 		});
 		ItemAction.registerInventory(30570, "read", (player, item) -> {
 			player.dialogue(new MessageDialogue("This will redeem 1 perk point."));

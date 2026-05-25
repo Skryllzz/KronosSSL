@@ -10,7 +10,6 @@ import io.ruin.model.activities.perktree.perks.BobTheBuilder;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.var.VarPlayerRepository;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
@@ -299,11 +298,6 @@ public abstract class Room {
 		}
 		player.startEvent(event -> {
 			player.lock();
-			if (selected.getItemId() == 8315) {
-				player.mahoganyArmchairsMade++;
-				if (player.mahoganyArmchairsMade == Achievements.NOW_THAT_IS_JUST_UNNCECESSARY.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.NOW_THAT_IS_JUST_UNNCECESSARY.getAchievementName());
-			}
 			DailyTasks.handleTaskProgression(player, selected);
 			PerkTaskHandler.handleCompleteAction(player, selected.ordinal());
 			player.animate(selected.getAnimation());

@@ -6,7 +6,6 @@ import io.ruin.model.activities.perktree.perks.ArtsnCrafts;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillItem;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.skills.Tool;
@@ -61,11 +60,6 @@ public enum Amethyst {
 				xpToGain *= multiplier;
 				DailyTasks.handleItemObtained(player, crystal.itemID, StatType.Crafting);
 				player.getStats().addXp(StatType.Crafting, xpToGain, true);
-				if (crystal == AMETHYST_ARROW_TIPS) {
-					player.amethystArrowTipsCrafted += crystal.amount;
-					if (player.amethystArrowTipsCrafted == Achievements.COLOURFUL_TIPS.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.COLOURFUL_TIPS.getAchievementName());
-				}
 				event.delay(2);
 			}
 		});

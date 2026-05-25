@@ -5,7 +5,6 @@ import io.ruin.model.activities.perktree.perks.FletchingDreams;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillItem;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.stat.StatType;
@@ -38,11 +37,6 @@ public enum StringCrossbow {
 		player.getInventory().add(strung, 1);
 		player.sendMessage("You add a string to the crossbow");
 		player.animate(animation);
-		if (strung == 9185) {
-			player.runiteCrossbowsFletched++;
-			if (player.runiteCrossbowsFletched == Achievements.LIMBS_TO_LIMBS.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LIMBS_TO_LIMBS.getAchievementName());
-		}
 		double newExp = exp;
 		if (player.getPlayerPerkHandler().getActivePerks(player).contains(Perks.FLETCHING_DREAMS)) {
 			int perkIndex = player.getPlayerPerkHandler().getActivePerkIndex(player, Perks.FLETCHING_DREAMS);

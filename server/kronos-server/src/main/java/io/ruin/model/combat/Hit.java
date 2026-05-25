@@ -8,7 +8,6 @@ import io.ruin.model.entity.Entity;
 import io.ruin.model.entity.npc.NPC;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.LockType;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.actions.impl.itemeffects.itemhandlers.AoESwipe;
 import io.ruin.model.item.actions.impl.itemeffects.itemhandlers.ArmourBreaker;
 import io.ruin.model.item.actions.impl.itemeffects.itemhandlers.CriticalHit;
@@ -403,15 +402,6 @@ public class Hit {
 							attackBonus *= PVP_MAGIC_ACCURACY_MODIFIER;
 						if (PVP_MELEE_ACCURACY_MODIFIER != 0 && attackStyle.isMelee())
 							attackBonus *= PVP_MELEE_ACCURACY_MODIFIER;
-					}
-					if (attackWeapon != null) {
-						if (attackWeapon.id == 861) {
-							attacker.player.magicShortbowAttacks++;
-							if (attacker.player.magicShortbowAttacks == Achievements.ITS_MAGIC_YOU_KNOW.getCompletionAmount())
-								attacker.player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-										+ Achievements.ITS_MAGIC_YOU_KNOW.getAchievementName());
-
-						}
 					}
 					double defenceBonus = getDefenceBonus(target) * (1D + defenceBoost);
 					double hitChance;

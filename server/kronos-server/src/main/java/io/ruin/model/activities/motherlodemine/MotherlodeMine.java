@@ -13,7 +13,6 @@ import io.ruin.model.inter.ToplevelComponent;
 import io.ruin.model.inter.dialogue.ItemDialogue;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.NPCDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.skills.Tool;
 import io.ruin.model.var.VarPlayerRepository;
 import io.ruin.model.item.Item;
@@ -158,9 +157,6 @@ public class MotherlodeMine { //why do we have two motherlode mine classes? Remo
 						event.delay(1);
 						player.getMovement().teleport(3755, 5675, 0);
 						player.unlock();
-						player.motherloadMineUpperUnlockedCounter++;
-						if (player.motherloadMineUpperUnlockedCounter == Achievements.WAS_I_THAT_SMALL_ALL_THIS_TIME.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.WAS_I_THAT_SMALL_ALL_THIS_TIME.getAchievementName());
 					});
 				}
 			} else if (player.isAt(3756, 5674)) {
@@ -220,10 +216,6 @@ public class MotherlodeMine { //why do we have two motherlode mine classes? Remo
 
 	public static void tunnel(Player player, int x, int y) {
 		player.startEvent(event -> {
-			player.enteredMotherloadMineCounter++;
-			if (player.enteredMotherloadMineCounter == Achievements.OPEN_YOUR_MINE.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.OPEN_YOUR_MINE.getAchievementName());
-
 			player.lock();
 			player.animate(2796);
 			event.delay(3);

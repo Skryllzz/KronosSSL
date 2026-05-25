@@ -9,6 +9,7 @@ import io.ruin.model.activities.perktree.PerkTaskHandler;
 import io.ruin.model.activities.perktree.Perks;
 import io.ruin.model.activities.perktree.perks.SpeedFisher;
 import io.ruin.model.activities.perktree.perks.ThePetHunter;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.content.camelstatue.CamelStatueHandler;
 import io.ruin.model.content.camelstatue.CamelStatueRewards;
 import io.ruin.model.entity.npc.NPC;
@@ -16,7 +17,6 @@ import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.StepType;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.pet.Pet;
 import io.ruin.model.item.containers.Equipment;
@@ -87,11 +87,6 @@ public class FishingSpot {
 			if (levelDifference < 0) {
 				/* not high enough level */
 				continue;
-			}
-			if (tool.id == 309) {
-				player.flyFishCaughtCounter++;
-				if (player.flyFishCaughtCounter == Achievements.SOMETHING_IS_FISHY_HERE_I.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.SOMETHING_IS_FISHY_HERE_I.getAchievementName());
 			}
 			double chance = c.baseChance;
 			if (chance >= 1.0) {
@@ -295,31 +290,15 @@ public class FishingSpot {
 						PerkTaskHandler.handleGatherResource(player, c.id, amount);
 						DailyTasks.handleItemObtained(player, c.id, StatType.Fishing);
 
+						if (c.id == 321) {
+							AchievementDiary.check(player, AchievementDiary.Task.LUMBRIDGE_EASY_5);
+						}
 
 						if (Random.rollPercent(getDonatorNoteChance(player)) && c.id != 13339)
 							player.getInventory().add(c.id + 1, amount);
 						else
 							player.getInventory().add(c.id, amount);
 
-
-						if (c.id == 371) {
-							player.swordfishFished++;
-							if (player.swordfishFished == Achievements.SOMETHING_IS_FISHY_HERE_II.getCompletionAmount())
-								player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.SOMETHING_IS_FISHY_HERE_II.getAchievementName());
-						}
-
-						if (c.id == 383 || c.id == 13439) {
-							player.anglerFishAndSharksCaughtCounter++;
-							if (player.anglerFishAndSharksCaughtCounter == Achievements.SOMETHING_IS_FISHY_HERE_III.getCompletionAmount())
-								player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.SOMETHING_IS_FISHY_HERE_III.getAchievementName());
-						}
-
-						if (c.id == 11934) {
-							player.darkCrabsFished++;
-							if (player.darkCrabsFished == Achievements.SOMETHING_IS_FISHY_HERE_IV.getCompletionAmount())
-								player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.SOMETHING_IS_FISHY_HERE_IV.getAchievementName());
-
-						}
 
 						if (npc.getId() != MINNOWS)
 							PlayerCounter.TOTAL_FISH.increment(player, 1);

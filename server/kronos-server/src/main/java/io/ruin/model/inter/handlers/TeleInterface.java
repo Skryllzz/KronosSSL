@@ -10,7 +10,6 @@ import io.ruin.model.inter.ToplevelComponent;
 import io.ruin.model.inter.actions.DefaultAction;
 import io.ruin.model.inter.actions.SimpleAction;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.ItemContainer;
@@ -1660,23 +1659,12 @@ public class TeleInterface extends ItemContainer {
 		}
 		if (currentTeleport == ServerTeleports.MALAKAR)
 			currentTeleport.teleportPos = DonationBossHandler.malakarTeleportPosition;
-		if (currentTeleport == ServerTeleports.PURO_PURO) {
-			player.puropuroTravelledCounter++;
-			if (player.puropuroTravelledCounter == Achievements.MIGHT_NEED_A_JAR_OR_TWO.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-					+ Achievements.MIGHT_NEED_A_JAR_OR_TWO.getAchievementName());
-
-		}
 		if (currentTeleport == ServerTeleports.SAND_CRABS) {
 			player.clanChatSpeeches++;
 			if (player.clanChatSpeeches == 1)
 				player.sendMessage("<col=000080>You have completed the newcomer task: <col=800000>"
 					+ NewcomerTasks.MISSING_HOME.getFormattedName() + "!");
 		}
-		player.homeTeleportsUsed++;
-		if (player.homeTeleportsUsed == Achievements.NEXWORKING.getCompletionAmount())
-			player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-				+ Achievements.NEXWORKING.getAchievementName());
 		player.lastServerTeleport = currentTeleport;
 		ModernTeleport.teleport(player, currentTeleport.teleportPos);
 		player.closeInterfaces();

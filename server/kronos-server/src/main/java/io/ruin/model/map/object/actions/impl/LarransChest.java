@@ -4,7 +4,6 @@ import io.ruin.api.utils.Random;
 import io.ruin.cache.Icon;
 import io.ruin.model.activities.wilderness.LarranChestLoot;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.loot.LootItem;
 import io.ruin.model.item.loot.LootTable;
@@ -105,9 +104,6 @@ public class LarransChest {
 					"</col>[<shad=8A0011>Wilderness</shad>] Larran's Chest has just been opened by " + player.getName() + "!");
 			}
 			player.larranChestsOpened++;
-			if (player.larranChestsOpened == Achievements.WHAT_DO_WE_HAVE_HERE_II.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-					+ Achievements.WHAT_DO_WE_HAVE_HERE_II.getAchievementName());
 
 			if (Random.rollPercent(getDonatorSaveChance(player)))
 				player.sendMessage("<shad=3CB3DD>Your donator status allows you to save your key!");

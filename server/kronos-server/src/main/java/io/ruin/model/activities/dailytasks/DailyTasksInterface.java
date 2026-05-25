@@ -99,7 +99,6 @@ public class DailyTasksInterface {
 			player.getInventory().addOrDrop(player.dailyTasksCompletionReward.getId(), player.dailyTasksCompletionReward.getAmount());
 			int pointsReward = Misc.random(2500, 7500);
 			player.sendMessage("You receive <col=000000><shad=29F1FE>" + pointsReward + " Reason points<col=000000></shad> for completing the task.");
-			player.updateReasonPoints(pointsReward);
 		} else player.sendMessage("You must complete all the tasks first.");
 	}
 
@@ -113,7 +112,6 @@ public class DailyTasksInterface {
 				player.getInventory().addOrDrop(player.currentDailyRewards[index]);
 				int pointsReward = Misc.random(1000, 3000) + (player.currentDailyTasks[index].difficulty.ordinal() * 1500);
 				player.sendMessage("You receive <col=000000><shad=29F1FE>" + pointsReward + " Reason points<col=000000></shad> for completing the task.");
-				player.updateReasonPoints(pointsReward);
 				player.currentDailyRewardsClaimed[index] = true;
 				int coinReward = 500000 * (1 + player.currentDailyTasks[index].difficulty.ordinal());
 				player.getInventory().addOrDrop(new Item(995, coinReward));

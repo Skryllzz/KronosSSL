@@ -21,8 +21,6 @@ import io.ruin.model.inter.Widget;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
-import io.ruin.model.inter.dialogue.YesNoDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemNPCAction;
@@ -78,11 +76,6 @@ public class HomeHandler {
 			player.sendMessage("You have stopped casting.");
 		}
 		book.setActive(player);
-		player.homeSpellbookAltarsUsed++;
-		if (player.homeSpellbookAltarsUsed == Achievements.OH_CUL.getCompletionAmount())
-			player.sendMessage("<col=000080>You have completed the achievement: <col=800000>%s"
-					.formatted(Achievements.OH_CUL.getAchievementName()));
-
 	}
 
 	public static void drinkFromPool(Player player) {
@@ -109,10 +102,6 @@ public class HomeHandler {
 		if (player.isPoisoned())
 			player.toxins.cure(Toxins.ToxinType.POSION, 0);
 		player.sendFilteredMessage("The effects of the ornate pool replenish you.");
-		player.homePoolsUsed++;
-		if (player.homePoolsUsed == Achievements.JUST_A_LITTLE_BOOST.getCompletionAmount())
-			player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-					+ Achievements.JUST_A_LITTLE_BOOST.getAchievementName());
 
 		// reset veng issue
 		VarPlayerRepository.VENG_COOLDOWN.set(player, 0);

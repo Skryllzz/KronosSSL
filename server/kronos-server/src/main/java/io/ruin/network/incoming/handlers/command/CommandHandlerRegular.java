@@ -30,7 +30,6 @@ import io.ruin.model.inter.ToplevelComponent;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.handlers.ServerTeleports;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.pet.Pet;
@@ -245,12 +244,8 @@ public class CommandHandlerRegular {
 					VoteHandler.addHwid(player.hwid);
 					player.votePoints += points;
 					player.votesClaimed += claimedVotes.size();
-					player.claimedVotes++;
 					Instant now = Instant.now();
 					player.lastVoteClaimInEpoch = now.getEpochSecond();
-					if (player.claimedVotes == Achievements.THIRD_PART_CANDIDATE.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-								+ Achievements.THIRD_PART_CANDIDATE.getAchievementName());
 
 					VoteBossHandler.addVote(claimedVotes.size());
 					player.getDailyVote().voteCheck();
@@ -852,10 +847,6 @@ public class CommandHandlerRegular {
 			}
 
 			case "puropuro": {
-				player.puropuroTravelledCounter++;
-				if (player.puropuroTravelledCounter == Achievements.MIGHT_NEED_A_JAR_OR_TWO.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-							+ Achievements.MIGHT_NEED_A_JAR_OR_TWO.getAchievementName());
 				teleport(player, ServerTeleports.PURO_PURO.getTeleportPos());
 				return true;
 			}

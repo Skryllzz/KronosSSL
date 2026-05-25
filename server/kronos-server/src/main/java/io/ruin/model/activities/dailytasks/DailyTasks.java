@@ -174,7 +174,6 @@ public enum DailyTasks {
 	//CRAFT_GLASSBLOWING_VIAL("Craft vial through glassblowing", "You're tasked with crafting a vial through glassblowing", Difficulty.EASY, 20, 50, ItemID.VIAL, StatType.Crafting, TaskType.SKILLING, 5),
 	CRAFT_GLASSBLOWING_ORB("Craft unpowered orb through glassblowing", "You're tasked with crafting an unpowered orb through glassblowing", Difficulty.MEDIUM, 20, 80, ItemID.UNPOWERED_ORB, StatType.Crafting, TaskType.SKILLING, 25),
 	CRAFT_GLASSBLOWING_LANTERN("Craft lantern lens through glassblowing", "You're tasked with crafting a lantern lens through glassblowing", Difficulty.HARD, 40, 90, ItemID.LANTERN_LENS, StatType.Crafting, TaskType.SKILLING, 50),
-	//COMPLETE_ACHIEVEMENTS("Complete achievement diary entries", "You're tasked with completing achievements", Difficulty.ELITE, 15, 25, "achiev", null, TaskType.SKILLING, 1),
 	FLETCH_ARROW_SHAFT("Fletch some arrow shafts", "You're tasked with fletching arrow shafts sets", Difficulty.EASY, 20, 100, ItemID.ARROW_SHAFT, StatType.Fletching, TaskType.SKILLING, 1),
 	FLETCH_UNSTRUNG_SHORTBOW("Fletch unstrung shortbows", "You're tasked with fletching unstrung shortbows", Difficulty.EASY, 10, 20, ItemID.SHORTBOW_U, StatType.Fletching, TaskType.SKILLING, 5),
 	FLETCH_UNSTRUNG_LONGBOW("Fletch unstrung longbows", "You're tasked with fletching unstrung longbows", Difficulty.EASY, 10, 20, ItemID.LONGBOW_U, StatType.Fletching, TaskType.SKILLING, 10),
@@ -220,7 +219,6 @@ public enum DailyTasks {
 	BUILD_OAK_THRONE("Build oak thrones in your POH", "You're tasked with building oak thrones in your POH", Difficulty.HARD, 15, 30, Buildable.OAK_THRONE, StatType.Construction, TaskType.SKILLING, Buildable.OAK_THRONE.getLevelReq()),
 	KILL_WINTERTODT("Subdue the wintertodt", "You're tasked with subduing the wintertodt", Difficulty.HARD, 2, 5, "wintertodt", StatType.Firemaking, TaskType.SKILLING, 50),
 	OBTAIN_PERK_POINTS("Obtain perk points", "You're tasked with obtaining perk points through the perk master", Difficulty.ELITE, 2, 4, "perkPoints", null, TaskType.SKILLING, 1),
-	OBTAIN_REASON_POINTS("Obtain Reason points", "You are tasked with obtaining", Difficulty.ELITE, 5000, 15000, "reasonPoints", null, TaskType.SKILLING, 1),
 	CATCH_ECLECTRIC("Catch eclectic implings", "You're tasked with catching eclectric implings", Difficulty.MEDIUM, 5, 10, "eclectic", StatType.Hunter, TaskType.SKILLING, 50),
 	CATCH_GOURMET_IMPLINGS("Catch gourmet implings", "You're tasked with catching gourmet implings", Difficulty.MEDIUM, 5, 20, "gourmet", StatType.Hunter, TaskType.SKILLING, 28),
 	CATCH_NATURE_IMPLINGS("Catch nature implings", "You're tasked with catching nature implings", Difficulty.HARD, 7, 25, "nature", StatType.Hunter, TaskType.SKILLING, 58),
@@ -285,9 +283,6 @@ public enum DailyTasks {
 				}
 			})
 			.filter(dailyTasks -> {
-				if (player.getAchievement().getCompletionAmount() > 10) {
-					return !dailyTasks.name().contains("achiev");
-				}
 				return true;
 			})
 			.collect(Collectors.toList());

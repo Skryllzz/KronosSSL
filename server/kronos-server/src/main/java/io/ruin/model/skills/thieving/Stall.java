@@ -5,6 +5,7 @@ import io.ruin.model.World;
 import io.ruin.model.activities.perktree.Perks;
 import io.ruin.model.activities.perktree.perks.ThePetHunter;
 import io.ruin.model.content.HomeHandler;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.content.camelstatue.CamelStatueHandler;
 import io.ruin.model.content.camelstatue.CamelStatueRewards;
 import io.ruin.model.entity.player.Player;
@@ -329,6 +330,12 @@ public enum Stall {
 			replaceStall(stall, object, replacementID, player);
 			Item loot = stall.lootTable.rollItem();
 			player.getInventory().add(loot);
+			if (stall == Stall.SILK_STALL) {
+				player.lastSilkSteal.delay(50); // 30 seconds cooldown (50 ticks * 0.6s)
+			}
+			if (stall == Stall.BAKERS_STALL && player.getPosition().inBounds(ARDOUGNE_MARKET)) {
+				AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_2);
+			}
 			if (player.getPosition().inBounds(HOME))
 				player.edgevilleStallCooldown.delay(3);
 			int petOdds = stall.petOdds;
@@ -380,6 +387,8 @@ public enum Stall {
 	}
 
 	private static final Bounds HOME = new Bounds(2002, 3558, 2017, 3573, -1);
+
+	private static final Bounds ARDOUGNE_MARKET = new Bounds(2643, 3302, 2673, 3324, 0);
 
 	public static void replaceStall(Stall stall, GameObject object, int replacementID, Player player) {
 		World.startEvent(e -> {

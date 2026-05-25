@@ -82,14 +82,20 @@ public class InterfaceHandler {
 		if (interfaceId < 0 || interfaceId >= HANDLERS.length) {
 			return null;
 		}
-		if (!player.isVisibleInterface(interfaceId)) {
+		if (interfaceId != 259 && interfaceId != 512 && !player.isVisibleInterface(interfaceId)) {
 			return null;
 		}
 		InterfaceHandler handler = HANDLERS[interfaceId];
 		if (handler == null) {
+			if (player.debug || interfaceId == 259 || interfaceId == 512) {
+				player.sendFilteredMessage("[DEBUG_LOG] No handler registered for interface " + interfaceId);
+			}
 			return null;
 		}
 		if (childId < 0 || childId >= handler.actions.length) {
+			if (player.debug || interfaceId == 259 || interfaceId == 512) {
+				player.sendFilteredMessage("[DEBUG_LOG] Child ID " + childId + " out of bounds for interface " + interfaceId + " (length: " + handler.actions.length + ")");
+			}
 			return null;
 		}
 		return handler.actions[childId];

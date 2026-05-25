@@ -11,7 +11,6 @@ import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.dialogue.PlayerDialogue;
 import io.ruin.model.inter.handlers.ServerTeleports;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.map.Direction;
 import io.ruin.model.map.MapListener;
@@ -64,9 +63,6 @@ public class PuroPuro {
 		 */
 		ObjectAction.register(24991, "enter", (player, obj) -> player.startEvent(event -> {
 			player.lock();
-			player.puropuroTravelledCounter++;
-			if (player.puropuroTravelledCounter == Achievements.MIGHT_NEED_A_JAR_OR_TWO.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.MIGHT_NEED_A_JAR_OR_TWO.getAchievementName());
 
 			event.delay(1);
 			event.delay(1);

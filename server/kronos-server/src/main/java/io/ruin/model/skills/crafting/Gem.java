@@ -7,7 +7,6 @@ import io.ruin.model.activities.perktree.perks.PacksnPotions;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillItem;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.stat.StatType;
@@ -57,11 +56,6 @@ public enum Gem {
 
 		player.getStats().addXp(StatType.Crafting, xpToGain, true);
 		DailyTasks.handleItemObtained(player, cutId, StatType.Crafting);
-		if (cutId == 1601) {
-			player.diamondsCut++;
-			if (player.diamondsCut == Achievements.HOW_MANY_RINGS_DO_YOU_NEED.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.HOW_MANY_RINGS_DO_YOU_NEED.getAchievementName());
-		}
 	}
 
 	public static void register() {

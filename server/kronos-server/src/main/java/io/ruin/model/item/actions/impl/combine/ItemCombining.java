@@ -5,7 +5,6 @@ import io.ruin.cache.ObjType;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.ItemDialogue;
 import io.ruin.model.inter.dialogue.YesNoDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemAction;
 import io.ruin.model.item.actions.ItemItemAction;
@@ -95,12 +94,6 @@ public enum ItemCombining {
 					kit.remove(1);
 				}
 				player.getInventory().add(result);
-				if (result.getId() == 11283) {
-					player.dragonfireShieldsSmithed++;
-					if (player.dragonfireShieldsSmithed == Achievements.THIS_WILL_TEACH_THEM.getCompletionAmount())
-						player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THIS_WILL_TEACH_THEM.getAchievementName());
-
-				}
 				new ItemDialogue().one(resultID, "You apply the " + item.getDef().name + " to the " + kit.getDef().name + ".");
 			})
 		);

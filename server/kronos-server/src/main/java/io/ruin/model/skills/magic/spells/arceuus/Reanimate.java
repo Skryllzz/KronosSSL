@@ -6,7 +6,6 @@ import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.shared.StepType;
 import io.ruin.model.entity.shared.listeners.DeathListener;
 import io.ruin.model.inter.dialogue.ItemDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.map.Bounds;
 import io.ruin.model.map.Position;
@@ -74,11 +73,7 @@ public class Reanimate extends Spell {
 			player.graphics(1288);
 			event.delay(1);
 			player.getInventory().remove(item.getId(), 1);
-			if (item.getId() == 13510 || item.getId() == 13511) {
-				player.dragonsAnimated++;
-				if (player.dragonsAnimated == Achievements.THANKFULLY_NOT_ALL_AT_ONCE.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THANKFULLY_NOT_ALL_AT_ONCE.getAchievementName());
-			}
+
 			GroundItem groundItem = new GroundItem(item.getId(), 1).owner(player).position(oldPosition).spawn();
 			projectile.send(player.getAbsX(), player.getAbsY(), oldPosition.getX(), oldPosition.getY());
 			event.delay(2);

@@ -304,32 +304,6 @@ public enum Currency {
 			return amount;
 		}
 	}),
-	REASON(new CurrencyHandler("reason points") {
-
-		@Override
-		public int getCurrencyCount(Player player) {
-			return player.getReasonPoints();
-		}
-
-		@Override
-		public int removeCurrency(Player player, int amount) {
-			if (amount > player.getReasonPoints()) {
-				return 0;
-			}
-			player.reasonPoints -= amount;
-			return amount;
-		}
-
-		@Override
-		public int addCurrency(Player player, int amount) {
-			if ((long) player.reasonPoints + (long) amount > Integer.MAX_VALUE) {
-				player.reasonPoints = Integer.MAX_VALUE;
-			} else {
-				player.reasonPoints += amount;
-			}
-			return amount;
-		}
-	}),
 	LOYALTY(new CurrencyHandler("loyalty points") {
 
 		@Override
@@ -352,33 +326,6 @@ public enum Currency {
 				player.loyaltyPoints = Integer.MAX_VALUE;
 			} else {
 				player.loyaltyPoints += amount;
-			}
-			return amount;
-		}
-	}),
-
-	ACHIEVEMENT(new CurrencyHandler("achievement points") {
-
-		@Override
-		public int getCurrencyCount(Player player) {
-			return player.getAchievementPoints();
-		}
-
-		@Override
-		public int removeCurrency(Player player, int amount) {
-			if (amount > player.getAchievementPoints()) {
-				return 0;
-			}
-			player.achievementPoints -= amount;
-			return amount;
-		}
-
-		@Override
-		public int addCurrency(Player player, int amount) {
-			if ((long) player.achievementPoints + (long) amount > Integer.MAX_VALUE) {
-				player.achievementPoints = Integer.MAX_VALUE;
-			} else {
-				player.achievementPoints += amount;
 			}
 			return amount;
 		}

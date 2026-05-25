@@ -4,7 +4,6 @@ import io.ruin.cache.ObjType;
 import io.ruin.model.activities.perktree.Perks;
 import io.ruin.model.activities.perktree.perks.FletchingDreams;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.stat.StatType;
@@ -125,12 +124,6 @@ public enum Dart {
 		}
 		player.getStats().addXp(StatType.Fletching, newExp * amount, true);
 		player.sendFilteredMessage("You make " + amount + " " + pluralName + ".");
-		if (finishedId == 11230) {
-			player.dragonDartsFletched += amount;
-			if (player.dragonDartsFletched == Achievements.SMALL_BUT_DEADLY.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-						+ Achievements.SMALL_BUT_DEADLY.getAchievementName());
-		}
 
 		return true;
 	}

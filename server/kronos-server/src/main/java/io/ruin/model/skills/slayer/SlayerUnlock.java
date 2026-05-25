@@ -108,10 +108,6 @@ public enum SlayerUnlock {
 			VarPlayerRepository.SLAYER_POINTS.set(player,
 					VarPlayerRepository.SLAYER_POINTS.get(player) - price);
 			player.sendMessage(extension ? "Extension" : "Unlock" + " purchased.");
-			if (extension) {
-				player.slayerTasksBlockedOrExtended++;
-
-			}
 		}
 	}
 
@@ -244,7 +240,6 @@ public enum SlayerUnlock {
 				VarPlayerRepository.SLAYER_TASK.set(player, 0);
 
 				int pts = VarPlayerRepository.SLAYER_POINTS.get(player) - 100;
-				player.slayerTasksBlockedOrExtended++;
 
 				VarPlayerRepository.SLAYER_POINTS.set(player, pts);
 				player.sendMessage("You have successfully blocked your task.");

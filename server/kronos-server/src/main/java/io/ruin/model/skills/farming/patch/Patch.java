@@ -6,7 +6,6 @@ import io.ruin.api.utils.TimeUtils;
 import io.ruin.cache.ObjType;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.handlers.TabStats;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.containers.Equipment;
 import io.ruin.model.skills.farming.crop.Crop;
@@ -90,12 +89,7 @@ public abstract class Patch {
 						send();
 					}
 					if (isRaked()) {
-						if (getPatchName().contains("herb")) {
-							player.herbPatchesRaked++;
-							if (player.herbPatchesRaked == Achievements.THE_GRASS_IS_ALWAYS_GREENER.getCompletionAmount())
-								player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-									+ Achievements.THE_GRASS_IS_ALWAYS_GREENER.getAchievementName());
-						}
+						getPatchName();
 						player.resetAnimation();
 						return;
 					}

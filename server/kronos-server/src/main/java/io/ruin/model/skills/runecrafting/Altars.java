@@ -10,6 +10,7 @@ import io.ruin.model.activities.perktree.Perks;
 import io.ruin.model.activities.perktree.perks.ASlayingExperience;
 import io.ruin.model.activities.perktree.perks.OneWithTheRunes;
 import io.ruin.model.activities.perktree.perks.ThePetHunter;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.content.camelstatue.CamelStatueHandler;
 import io.ruin.model.content.camelstatue.CamelStatueRewards;
 import io.ruin.model.entity.npc.NPC;
@@ -17,7 +18,6 @@ import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.shared.LockType;
 import io.ruin.model.inter.dialogue.MessageDialogue;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemObjectAction;
 import io.ruin.model.item.actions.impl.AchievementLamp;
@@ -200,29 +200,13 @@ public enum Altars {
 			player.graphics(186, 100, 0);
 			e.delay(4);
 			int amount = essenceCount * runesPerEssence;
-			player.runecraftedRunesCounter += amount;
 			DailyTasks.handleItemObtained(player, altar.runeID, StatType.Runecrafting, amount);
 			PerkTaskHandler.handleGatherResource(player, altar.runeID, amount);
-			if (player.runecraftedRunesCounter == Achievements.THE_POWER_WITHIN.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THE_POWER_WITHIN.getAchievementName());
 
-			if (altar.runeID == ASTRAL.runeID) {
-				player.astralsCrafted += amount;
-				if (player.astralsCrafted == Achievements.ASTRALWORLD.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.ASTRALWORLD.getAchievementName());
+			if (altar == WATER) {
+				AchievementDiary.check(player, AchievementDiary.Task.LUMBRIDGE_EASY_4);
 			}
 
-			if (altar.runeID == BLOOD.runeID) {
-				player.bloodsCrafted += amount;
-				if (player.bloodsCrafted == Achievements.REAPING_THE_BENEFITS.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.REAPING_THE_BENEFITS.getAchievementName());
-			}
-
-			if (altar.runeID == WRATH.runeID) {
-				player.wrathsCrafted += amount;
-				if (player.wrathsCrafted == Achievements.FEEL_MY_WRATH.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.FEEL_MY_WRATH.getAchievementName());
-			}
 			if (player.getPlayerPerkHandler().getActivePerks(player).contains(Perks.ONE_WITH_THE_RUNES)) {
 				int perkIndex = player.getPlayerPerkHandler().getActivePerkIndex(player, Perks.ONE_WITH_THE_RUNES);
 				OneWithTheRunes c = (OneWithTheRunes) player.getPlayerPerkHandler().

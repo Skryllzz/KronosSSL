@@ -4,7 +4,6 @@ import io.ruin.api.utils.Random;
 import io.ruin.cache.ObjType;
 import io.ruin.model.content.combatachievements.CombatAchievements;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.ItemContainer;
 import io.ruin.model.item.loot.LootItem;
@@ -83,10 +82,6 @@ public class BarrowsRewards {
 					getCombatAchievement()).check(player);
 			}
 			allKilled = true;
-			player.barrowsCompletedKillingAllBrothers++;
-			if (player.barrowsCompletedKillingAllBrothers == Achievements.PASSED_THE_BARR.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-					+ Achievements.PASSED_THE_BARR.getAchievementName());
 		}
 		float chance = 45 - (int) brothersKilled;
 		if (brothersKilled < 6)

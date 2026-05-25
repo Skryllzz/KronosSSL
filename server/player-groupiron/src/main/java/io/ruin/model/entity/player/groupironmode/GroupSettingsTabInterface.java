@@ -1,6 +1,7 @@
 package io.ruin.model.entity.player.groupironmode;
 
 import io.ruin.Server;
+import io.ruin.cache.InterfaceDef;
 import io.ruin.model.World;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.groupironmode.hook.Attributes;
@@ -33,19 +34,20 @@ public class GroupSettingsTabInterface {
 
 	public static void open(Player player) {
 		player.currentSection = Section.GROUP_IRON;
+		int containerId = InterfaceDef.COUNTS[629] >= 44 ? 43 : 28;
 
 		if (!player.isGroupIronman()) {
-			player.getPacketSender().openSubInterface(1090, 629, 28, ClientInterfaceType.OVERLAY);
+			player.getPacketSender().openSubInterface(1090, 629, containerId, ClientInterfaceType.OVERLAY);
 			player.getPacketSender().sendString(1090, 0, "No group data could be loaded.");
 			return;
 		}
 
 		if (player.newGroupId <= 0) {
-			player.getPacketSender().openSubInterface(1090, 629, 28, ClientInterfaceType.OVERLAY);
+			player.getPacketSender().openSubInterface(1090, 629, containerId, ClientInterfaceType.OVERLAY);
 			player.getPacketSender().sendString(1090, 0,
 					"Join a group to display group<br>data.<br><br>::creategroup to make one.");
 		} else if (player.getGroupIron() != null) {
-			player.getPacketSender().openSubInterface(1088, 629, 28, ClientInterfaceType.OVERLAY);
+			player.getPacketSender().openSubInterface(1088, 629, containerId, ClientInterfaceType.OVERLAY);
 			displayOverview(player);
 		}
 	}

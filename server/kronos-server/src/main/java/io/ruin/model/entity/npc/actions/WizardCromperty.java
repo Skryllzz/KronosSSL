@@ -2,6 +2,7 @@ package io.ruin.model.entity.npc.actions;
 
 import io.ruin.model.entity.npc.NPCAction;
 import io.ruin.model.entity.player.Player;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.NPCDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
@@ -19,6 +20,7 @@ public class WizardCromperty {
 				player.graphics(111, 110, 0);
 				event.delay(3);
 				player.sendMessage("The wizard teleports you to the essence mine.");
+				AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_1);
 				player.getMovement().teleport(2910, 4830, 0);
 			});
 		});
@@ -31,6 +33,7 @@ public class WizardCromperty {
 				player.graphics(111, 110, 0);
 				event.delay(3);
 				player.sendMessage("The wizard teleports you to the essence mine.");
+				AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_1);
 				player.getMovement().teleport(2910, 4830, 0);
 			});
 		});
@@ -43,6 +46,7 @@ public class WizardCromperty {
 				player.graphics(111, 110, 0);
 				event.delay(3);
 				player.sendMessage("The wizard teleports you to the essence mine.");
+				AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_1);
 				player.getMovement().teleport(2910, 4830, 0);
 			});
 		});
@@ -55,6 +59,7 @@ public class WizardCromperty {
 				player.graphics(111, 110, 0);
 				event.delay(3);
 				player.sendMessage("Brimstail teleports you to the essence mine.");
+				AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_1);
 				player.getMovement().teleport(2910, 4830, 0);
 			});
 		});
@@ -67,6 +72,7 @@ public class WizardCromperty {
 				player.graphics(111, 110, 0);
 				event.delay(3);
 				player.sendMessage("Brimstail teleports you to the essence mine.");
+				AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_1);
 				player.getMovement().teleport(2910, 4830, 0);
 			});
 		});

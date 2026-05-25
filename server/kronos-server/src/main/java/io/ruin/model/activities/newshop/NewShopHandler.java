@@ -6,8 +6,6 @@ import io.ruin.model.activities.tempevents.summerevent.SummerStore;
 import io.ruin.model.entity.player.Player;
 
 public class NewShopHandler {
-	public static ReasonPointStore reasonPointStore = new ReasonPointStore();
-	public static AchievementPointStore achievementPointStore = new AchievementPointStore();
 	public static VotePointStore votePointStore = new VotePointStore();
 	public static DonatorPointStore donatorPointStore = new DonatorPointStore();
 	public static IronManStore ironManStore = new IronManStore();

@@ -10,7 +10,6 @@ import io.ruin.model.inter.dialogue.ItemDialogue;
 import io.ruin.model.inter.dialogue.OptionsDialogue;
 import io.ruin.model.inter.dialogue.YesNoDialogue;
 import io.ruin.model.inter.handlers.EquipmentStats;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemAction;
@@ -86,9 +85,6 @@ public class Blowpipe {
 			player.startEvent(event -> {
 				secondary.setId(UNCHARGED);
 				player.animate(3015);
-				player.blowpipesFletched++;
-				if (player.blowpipesFletched == Achievements.ARMED_NOT_LOADED.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.ARMED_NOT_LOADED.getAchievementName());
 				player.getStats().addXp(StatType.Fletching, 120.0, true);
 				player.dialogue(new ItemDialogue().one(UNCHARGED, "You carve the fang and turn it into a powerful blowpipe."));
 			});

@@ -7,6 +7,7 @@ import io.ruin.content.objects.GiantsDenCave;
 import io.ruin.content.objects.IsleOfSoulsDungeon;
 import io.ruin.content.objects.SourhogCave;
 import io.ruin.model.activities.bosses.sarachnis.SarachnisLair;
+import io.ruin.model.entity.npc.actions.ardounge.Aleck;
 import io.ruin.model.entity.player.PlayerLoginWorker;
 import io.ruin.model.item.actions.impl.boxes.mystery.EchoOrbMysteryBox;
 import io.ruin.model.map.dynamic.DynamicMap;
@@ -203,6 +204,7 @@ public final class StaticInit {
 		io.ruin.model.combat.special.melee.GraniteMaul.register();
 		io.ruin.model.combat.special.melee.SunlightSpear.register();
 		io.ruin.model.content.Announcements.register();
+		io.ruin.model.content.achievementdiary.AchievementDiaryInterface.register();
 		io.ruin.model.content.DailyVoteInterface.register();
 		io.ruin.model.content.HomeHandler.register();
 		io.ruin.model.map.object.actions.impl.edgeville.SoulWarsPortal.register();
@@ -240,6 +242,11 @@ public final class StaticInit {
 		io.ruin.model.entity.npc.actions.Runa.register();
 		io.ruin.model.entity.npc.actions.SarahsFarmingShop.register();
 		io.ruin.model.entity.npc.actions.Sedridor.register();
+		Aleck.register();
+		io.ruin.model.entity.npc.actions.ardounge.TwoPints.register();
+		io.ruin.model.entity.npc.actions.ardounge.SIlkTrader.register();
+		io.ruin.model.entity.npc.actions.portkhazard.TindelMarchant.register();
+		io.ruin.model.map.object.actions.impl.ardougne.Gate.register();
 		io.ruin.model.entity.npc.actions.Thessalia.register();
 		io.ruin.model.entity.npc.actions.TwiggyOKorn.register();
 		io.ruin.model.entity.npc.actions.Watson.register();
@@ -344,7 +351,6 @@ public final class StaticInit {
 		io.ruin.model.inter.dialogue.PlayerDialogue.register();
 		io.ruin.model.inter.dialogue.YesNoDialogue.register();
 		io.ruin.model.inter.dialogue.skill.SkillDialogue.register();
-		io.ruin.model.inter.handlers.AchievementInterface.register();
 		io.ruin.model.inter.handlers.DropViewer.register();
 		io.ruin.model.inter.handlers.EquipmentStats.register();
 		io.ruin.model.item.actions.impl.storage.MineralBag.register();
@@ -433,6 +439,7 @@ public final class StaticInit {
 		io.ruin.model.item.actions.impl.SaradominLight.register();
 		io.ruin.model.item.actions.impl.ShayzienArmourPack.register();
 		io.ruin.model.item.actions.impl.SkillLamp.register();
+		io.ruin.model.item.actions.impl.EasyAntiqueLamp.register();
 		io.ruin.model.item.actions.impl.SkinScrolls.register();
 		io.ruin.model.item.actions.impl.SlayerPickTaskScroll.register();
 		io.ruin.model.item.actions.impl.SlayerTaskSkipScroll.register();
@@ -605,6 +612,10 @@ public final class StaticInit {
 		io.ruin.model.map.object.actions.impl.FairyRing.register();
 		io.ruin.model.map.object.actions.impl.Flax.register();
 		io.ruin.model.map.object.actions.impl.Forthos.GrubbyChest.register();
+		io.ruin.model.map.object.actions.impl.Gangplank.register();
+		io.ruin.model.map.object.actions.impl.KaramjaBoats.register();
+		io.ruin.model.map.object.actions.impl.KronosRejuvinationPool.register();
+		io.ruin.model.map.object.actions.impl.Ladder.register();
 		io.ruin.model.map.object.actions.impl.KaramjaBoats.register();
 		io.ruin.model.map.object.actions.impl.KronosRejuvinationPool.register();
 		io.ruin.model.map.object.actions.impl.Ladder.register();

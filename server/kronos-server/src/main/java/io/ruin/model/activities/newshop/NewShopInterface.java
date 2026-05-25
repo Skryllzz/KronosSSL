@@ -185,9 +185,6 @@ public class NewShopInterface {
 							break;
 						case 10:
 							player.sendMessage("" + new Item(itemId).getDef().examine);
-							if (itemId == 30430) {
-								player.getLootsViewer().updateInterface(player, LootsTables.REASON_ULTRA_POINT_BOX);
-							}
 							if (itemId == 30461 || itemId == 30446 || itemId == 4810) {
 								player.getLootsViewer().updateInterface(player, LootsTables.REGULAR_MYSTERY_BOX);
 							}

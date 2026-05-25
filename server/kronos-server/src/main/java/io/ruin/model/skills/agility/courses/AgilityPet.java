@@ -9,7 +9,6 @@ import io.ruin.model.activities.perktree.perks.ThePetHunter;
 import io.ruin.model.content.camelstatue.CamelStatueHandler;
 import io.ruin.model.content.camelstatue.CamelStatueRewards;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.actions.impl.pet.Pet;
 
 public class AgilityPet {
@@ -27,9 +26,6 @@ public class AgilityPet {
 				player.sendFilteredMessage(NumberUtils.formatNumber(c.getReward()) + " coins has been sent to your bank for completing the agility course.");
 			}
 		}
-		player.agilityLapsRan++;
-		if (player.agilityLapsRan == Achievements.ANOTHER_ONE_BITES_THE_DUST.getCompletionAmount())
-			player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.ANOTHER_ONE_BITES_THE_DUST.getAchievementName());
 		if (player.getPlayerPerkHandler().getActivePerks(player).contains(Perks.THE_PET_HUNTER)) {
 			int perkIndex = player.getPlayerPerkHandler().getActivePerkIndex(player, Perks.THE_PET_HUNTER);
 			ThePetHunter c = (ThePetHunter) player.getPlayerPerkHandler().

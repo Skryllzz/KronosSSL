@@ -2,6 +2,7 @@ package io.ruin.model.activities.wilderness;
 
 import io.ruin.model.World;
 import io.ruin.model.activities.bosses.instancetoken.InstanceMaps;
+import io.ruin.model.content.achievementdiary.AchievementDiary;
 import io.ruin.model.activities.pvminstances.InstanceDialogue;
 import io.ruin.model.activities.pvminstances.InstanceType;
 import io.ruin.model.entity.player.Player;
@@ -39,6 +40,7 @@ public class Lever {
 		 * Ardougne
 		 */
 		ObjectAction.register(1814, 2561, 3311, 0, "pull", (player, obj) -> {
+			AchievementDiary.check(player, AchievementDiary.Task.ARDOUGNE_EASY_8);
 			pull(player, obj, 3154, 3924, "...and teleport into the wilderness.");
 		});
 

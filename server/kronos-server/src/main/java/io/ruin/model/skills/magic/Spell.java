@@ -2,7 +2,6 @@ package io.ruin.model.skills.magic;
 
 import io.ruin.model.entity.Entity;
 import io.ruin.model.entity.player.Player;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.map.object.GameObject;
 import io.ruin.model.skills.magic.rune.RuneRemoval;
@@ -47,17 +46,7 @@ public class Spell {
 				} else if (r != null) {
 					r.remove();
 				}
-				if (lvlReq == 80) {
-					assert runeItems != null;
-					if (runeItems[0].getId() == 554) {
-						if (p.getEquipment().get(3).getId() > 2414 && p.getEquipment().get(3).getId() < 2418) {
-							p.chargesCastWearingGodStaff++;
-							if (p.chargesCastWearingGodStaff == Achievements.PRAYERS_ANSWERED.getCompletionAmount())
-								p.sendMessage("<col=000080>You have completed the achievement: <col=800000>"
-										+ Achievements.PRAYERS_ANSWERED.getAchievementName());
-						}
-					}
-				}
+				assert lvlReq != 80 || runeItems != null;
 				p.getStats().addXp(StatType.Magic, xp, useXpMultiplier);
 				SpellbookSwap.resetBookPostCast(p);
 			}

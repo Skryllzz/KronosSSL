@@ -14,7 +14,6 @@ import io.ruin.model.content.camelstatue.CamelStatueRewards;
 import io.ruin.model.entity.player.Player;
 import io.ruin.model.entity.player.PlayerCounter;
 import io.ruin.model.entity.player.SecondaryGroup;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.impl.BirdNest;
 import io.ruin.model.item.actions.impl.pet.Pet;
@@ -195,22 +194,6 @@ public class Woodcutting {
 								PlayerCounter.ACQUIRED_BIRDS_NESTS.increment(player, 1);
 							}
 							treeData.counter.increment(player, 1);
-							if (treeData.treeName.equalsIgnoreCase("oak logs")) {
-								if (player.choppedOak == Achievements.LUMBERJACK_I.getCompletionAmount())
-									player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LUMBERJACK_I.getAchievementName());
-							}
-							if (treeData.treeName.equalsIgnoreCase("yew logs")) {
-								if (player.choppedYew == Achievements.LUMBERJACK_II.getCompletionAmount())
-									player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LUMBERJACK_II.getAchievementName());
-							}
-							if (treeData.treeName.equalsIgnoreCase("magic logs")) {
-								if (player.choppedYew == Achievements.LUMBERJACK_III.getCompletionAmount())
-									player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LUMBERJACK_III.getAchievementName());
-							}
-							if (treeData.treeName.equalsIgnoreCase("redwood logs")) {
-								if (player.choppedRedwood == Achievements.LUMBERJACK_IV.getCompletionAmount())
-									player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LUMBERJACK_IV.getAchievementName());
-							}
 							//TODO: take away an item charge?
 						}
 					} else {
@@ -270,22 +253,6 @@ public class Woodcutting {
 						}
 					}
 					treeData.counter.increment(player, 1);
-					if (treeData.treeName.equalsIgnoreCase("oak logs")) {
-						if (player.choppedOak == Achievements.LUMBERJACK_I.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LUMBERJACK_I.getAchievementName());
-					}
-					if (treeData.treeName.equalsIgnoreCase("yew logs")) {
-						if (player.choppedYew == Achievements.LUMBERJACK_II.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LUMBERJACK_II.getAchievementName());
-					}
-					if (treeData.treeName.equalsIgnoreCase("magic logs")) {
-						if (player.choppedYew == Achievements.LUMBERJACK_III.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LUMBERJACK_III.getAchievementName());
-					}
-					if (treeData.treeName.equalsIgnoreCase("redwood logs")) {
-						if (player.choppedRedwood == Achievements.LUMBERJACK_IV.getCompletionAmount())
-							player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LUMBERJACK_IV.getAchievementName());
-					}
 					double xp = treeData.experience;
 					if (player.infernalAxeSpecial > 0)
 						xp *= 1.1;

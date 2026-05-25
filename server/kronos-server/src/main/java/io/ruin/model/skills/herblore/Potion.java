@@ -11,7 +11,6 @@ import io.ruin.model.entity.player.Player;
 import io.ruin.model.inter.dialogue.MessageDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillDialogue;
 import io.ruin.model.inter.dialogue.skill.SkillItem;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.item.Item;
 import io.ruin.model.item.actions.ItemItemAction;
 import io.ruin.model.stat.StatType;
@@ -201,18 +200,6 @@ public enum Potion {
 			DailyTasks.handleTaskDecrement(player, "mixattack");
 		if (potionName.contains("strength potion") && !potionName.contains("super"))
 			DailyTasks.handleTaskDecrement(player, "mixstrength");
-
-		if (potionName.contains("super restore")) {
-			DailyTasks.handleTaskDecrement(player, "mixsuperrestore");
-			player.superRestoresMixed++;
-			if (player.superRestoresMixed == Achievements.MIGHT_NEED_THESE_LATER.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.MIGHT_NEED_THESE_LATER.getAchievementName());
-		}
-		if (potionName.contains("super combat")) {
-			player.divineSuperCombatPotionsMixed++;
-			if (player.divineSuperCombatPotionsMixed == Achievements.LITTLE_BIT_OF_DIVINITY_IN_THE_MIX.getCompletionAmount())
-				player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.LITTLE_BIT_OF_DIVINITY_IN_THE_MIX.getAchievementName());
-		}
 	}
 
 	private void decant(Player player, Item fromPot, Item toPot) {

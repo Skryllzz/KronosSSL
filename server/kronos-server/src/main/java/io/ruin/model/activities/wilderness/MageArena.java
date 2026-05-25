@@ -13,7 +13,6 @@ import io.ruin.model.inter.InterfaceHandler;
 import io.ruin.model.inter.ToplevelComponent;
 import io.ruin.model.inter.actions.DefaultAction;
 import io.ruin.model.inter.dialogue.*;
-import io.ruin.model.inter.questtab.main.Achievements;
 import io.ruin.model.inter.utils.Option;
 import io.ruin.model.map.Direction;
 import io.ruin.model.map.MapListener;
@@ -294,9 +293,6 @@ public class MageArena {
 				player.animate(645);
 				player.dialogue(new MessageDialogue("You kneel and chant to Saradomin...").hideContinue());
 				event.delay(2);
-				player.magicCapesBought++;
-				if (player.magicCapesBought == Achievements.THANK_GOD_FOR_THAT.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THANK_GOD_FOR_THAT.getAchievementName());
 
 				player.dialogue(new MessageDialogue("You kneel and chant to Saradomin...<br>" +
 					"You feel a rush of energy charge through your veins.<br>" +
@@ -314,9 +310,6 @@ public class MageArena {
 				player.animate(645);
 				player.dialogue(new MessageDialogue("You kneel and chant to Guthix...").hideContinue());
 				event.delay(3);
-				player.magicCapesBought++;
-				if (player.magicCapesBought == Achievements.THANK_GOD_FOR_THAT.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THANK_GOD_FOR_THAT.getAchievementName());
 				World.sendGraphics(188, 0, 0, 2507, 4723, 0);
 				new GroundItem(2413, 1).position(2507, 4723, 0).owner(player).spawnPrivate();
 				player.dialogue(new MessageDialogue("You kneel and chant to Guthix...<br>" +
@@ -332,9 +325,6 @@ public class MageArena {
 				player.animate(645);
 				player.dialogue(new MessageDialogue("You kneel and chant to Zamorak...").hideContinue());
 				event.delay(3);
-				player.magicCapesBought++;
-				if (player.magicCapesBought == Achievements.THANK_GOD_FOR_THAT.getCompletionAmount())
-					player.sendMessage("<col=000080>You have completed the achievement: <col=800000>" + Achievements.THANK_GOD_FOR_THAT.getAchievementName());
 				World.sendGraphics(188, 0, 0, 2516, 4720, 0);
 				new GroundItem(2414, 1).position(2516, 4720, 0).owner(player).spawnPrivate();
 				player.dialogue(new MessageDialogue("You kneel and chant to Zamorak...<br>" +
